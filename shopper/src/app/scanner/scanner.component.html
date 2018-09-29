@@ -1,0 +1,11 @@
+<div [hidden]=(!barcodeValue) class="code">
+  {{barcodeValue}}
+</div>
+
+<div id="scanner"></div>
+
+<div *ngIf="err" class="error">
+  <div class="error-msg">
+    {{ err }}
+  </div>
+</div>
