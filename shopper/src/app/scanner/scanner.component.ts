@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import * as Quagga from 'quagga';
 
 @Component({
@@ -6,7 +6,7 @@ import * as Quagga from 'quagga';
   templateUrl: './scanner.component.html',
   styleUrls: ['./scanner.component.scss']
 })
-export class ScannerComponent implements AfterViewInit {
+export class ScannerComponent implements AfterViewInit, OnDestroy {
 
   values: any[] = [];
   err: string;
@@ -119,6 +119,11 @@ export class ScannerComponent implements AfterViewInit {
       }
     });
   }
+
+  ngOnDestroy() {
+    Quagga.stop();
+  }
+
 }
 
 function common(arr: Array<any>) {

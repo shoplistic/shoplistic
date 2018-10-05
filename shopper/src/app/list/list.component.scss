@@ -1,0 +1,21 @@
+ul {
+  max-width: 600px;
+  margin: auto;
+
+  li {
+    transition: background-color .15s ease-in-out;
+  }
+
+  li:hover {
+    background-color: lightgray;
+  }
+
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  color: #f77;
+  cursor: pointer;
+  outline: none;
+}
