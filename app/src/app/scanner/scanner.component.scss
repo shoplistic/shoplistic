@@ -1,6 +1,6 @@
-.code {
+.barcode {
   position: fixed;
-  top: 10px;
+  top: 70px;
   left: 10px;
   font-size: 16pt;
   background-color: #fff;
@@ -21,12 +21,5 @@
     position: fixed;
     transform: translate(-50%, -50%);
     color: #eee;
-  }
-
-  .material-icons {
-    display: block;
-    margin: auto;
-    text-align: center;
-    margin-bottom: 10px;
   }
 }
