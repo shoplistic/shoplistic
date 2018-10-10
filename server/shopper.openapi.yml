@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Shopper API.
+  description: Complete documentation for the Shopper API.
+  version: 1.0.0
+servers:
+  - url: http://api.shopper.ink/v1
+paths:
+  /auth:
+    post:
+      summary: Authenticate with a username and password to recieve a bearer token
+      tags:
+        - Authenticate
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: john
+                password:
+                  type: string
+                  example: ThisIsMySuperSecurePassword123
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: User authenticated. A JSON object containging a username and a bearer token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: john
+                  bearer:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                required:
+                  - username
+                  - bearer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user:
+    post:
+      summary: Create a new user
+      tags:
+        - User
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: john
+                password:
+                  type: string
+                  example: ThisIsMySuperSecurePassword123
+                password_repeat:
+                  type: string
+                  example: ThisIsMySuperSecurePassword123
+              required:
+                - username
+                - password
+                - password_repeat
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    patch:
+      summary: Update user info
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: john
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      summary: Delete user
+      tags:
+        - User
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/password:
+    patch:
+      summary: Update password
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  old_password:
+                    type: string
+                    example: ThisIsMySuperSecurePassword123
+                  new_password:
+                    type: string
+                    example: NewSecurePassword1
+                  password_repeat:
+                    type: string
+                    example: NewSecurePassword1
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Ok: # 200
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    Created: # 201
+      description: Resource created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    BadRequest: # 400
+      description: Malformed request syntax
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    Unauthorized: # 401
+      description: Valid request but credentials are incorrect
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    Conflict: # 409
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+    SeverError: # 5XX
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
+  schemas:
+    GenericResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - Bearer: []
