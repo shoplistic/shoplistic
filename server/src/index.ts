@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { env } from 'process';
 import * as log from './logger';
-import * as swagger from './swagger';
+import * as swagger from './api/v1/swagger';
 import * as api from './api/api';
 
 const app = express();
