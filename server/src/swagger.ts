@@ -6,7 +6,7 @@ import * as path from 'path';
 const swaggerDoc = yaml.load(path.join(process.cwd(), 'shopper.openapi.yml'));
 const router = Router();
 
-const DisableTryItOut = function() {
+const DisableTryItOut = () => {
   return {
     statePlugins: {
       spec: {
@@ -27,5 +27,14 @@ router.get('/', swaggerUi.setup(swaggerDoc, {
     ]
   }
 }));
+
+router.get('/json', (_req, res) => {
+  res.json(swaggerDoc);
+});
+
+router.get('/yaml', (_req, res) => {
+  res.header('Content-Type', 'text/yaml');
+  res.send(yaml.stringify(swaggerDoc, 100, 2));
+});
 
 export = router;
