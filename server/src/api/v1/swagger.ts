@@ -20,7 +20,7 @@ const DisableTryItOut = () => {
 
 router.use('/', swaggerUi.serve);
 router.get('/', swaggerUi.setup(swaggerDoc, {
-  customCss: '.swagger-ui .topbar { display: none }',
+  customCss: '.swagger-ui .topbar, .response-col_links { display: none }',
   swaggerOptions: {
     plugins: [
       DisableTryItOut

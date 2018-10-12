@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://api.shopper.ink/v1
 paths:
-  /auth:
+  /auth: # Login
     post:
       deprecated: true
       summary: Authenticate with a username and password to recieve a bearer token
@@ -51,7 +51,7 @@ paths:
 
         '401':
           $ref: '#/components/responses/Unauthorized'
-  /user:
+  /user: # Create user, Delete user, Update user
     post:
       deprecated: true
       summary: Create a new user
@@ -85,11 +85,24 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+    delete:
+      deprecated: true
+      summary: Delete user
+      tags:
+        - User
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /profile:
     patch:
       deprecated: true
       summary: Update user info
       tags:
-        - User
+        - Profile
       requestBody:
         required: true
         content:
@@ -107,24 +120,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
-    delete:
-      deprecated: true
-      summary: Delete user
-      tags:
-        - User
-      responses:
-        '200':
-          $ref: '#/components/responses/Ok'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-  /user/password:
+  /profile/password: # Update users password
     patch:
       deprecated: true
       summary: Update password
       tags:
-        - User
+        - Profile
       requestBody:
         required: true
         content:
@@ -141,6 +142,10 @@ paths:
                   password_repeat:
                     type: string
                     example: NewSecurePassword1
+                required:
+                  - old_password
+                  - new_password
+                  - password_repeat
       responses:
         '200':
           $ref: '#/components/responses/Ok'
@@ -148,6 +153,82 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+  /shoppinglist:
+    get:
+      deprecated: true
+      summary: Get all items in the shopping list
+      tags:
+        - Shopping list
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ShoppingListArticle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bcds:
+    post:
+      deprecated: true
+      summary: Add article to the barcode database
+      tags:
+        - Barcode Data Store
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    example: 7310070001764
+                  display_name:
+                    type: string
+                    example: Ramlösa Smultron 50cl
+                  manufacturer:
+                    type: string
+                    example: Carlsberg Sweden
+                required:
+                  - barcode
+                  - display_name
+                  - manufacturer
+      responses:
+        '201':
+          $ref: '#/components/responses/Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+  /bcds/{barcode}:
+    get:
+      deprecated: true
+      summary: Get info about a specific article
+      tags:
+        - Barcode Data Store
+      responses:
+        '200':
+          description: Article object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingListArticle'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      parameters:
+        - name: barcode
+          in: path
+          description: Barcode string
+          required: true
+          schema:
+            type: string
 components:
   responses:
     Ok: # 200
@@ -174,6 +255,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GenericResponse'
+    NotFound: # 404
+      description: Resourse not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericResponse'
     Conflict: # 409
       description: Conflict
       content:
@@ -187,6 +274,22 @@ components:
           schema:
             $ref: '#/components/schemas/GenericResponse'
   schemas:
+    ShoppingListArticle:
+      type: object
+      properties:
+        barcode:
+          type: string
+        display_name:
+          type: string
+        manufacturer:
+          type: string
+        amount:
+          type: number
+      required:
+        - barcode
+        - display_name
+        - manufacturer
+        - amount
     GenericResponse:
       type: object
       properties:
