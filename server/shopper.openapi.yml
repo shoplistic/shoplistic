@@ -98,6 +98,25 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
   /profile:
+    get:
+      deprecated: true
+      summary: Get user info
+      tags:
+        - Profile
+      responses:
+        '200':
+          description: User info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  permissions:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
     patch:
       deprecated: true
       summary: Update user info
@@ -205,6 +224,62 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '409':
           $ref: '#/components/responses/Conflict'
+    patch:
+      deprecated: true
+      summary: Edit an article in the barcode database
+      tags:
+        - Barcode Data Store
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    example: 7310070001764
+                  display_name:
+                    type: string
+                    example: Ramlösa Smultron 50cl
+                  manufacturer:
+                    type: string
+                    example: Carlsberg Sweden
+                required:
+                  - barcode
+                  - display_name
+                  - manufacturer
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      deprecated: true
+      summary: Delete article from the barcode database
+      tags:
+        - Barcode Data Store
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    example: 7310070001764
+                required:
+                  - barcode
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
   /bcds/{barcode}:
     get:
       deprecated: true
@@ -217,7 +292,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShoppingListArticle'
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    example: 7310070001764
+                  display_name:
+                    type: string
+                    example: Ramlösa Smultron 50cl
+                  manufacturer:
+                    type: string
+                    example: Carlsberg Sweden
+                required:
+                  - barcode
+                  - display_name
+                  - manufacturer
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
