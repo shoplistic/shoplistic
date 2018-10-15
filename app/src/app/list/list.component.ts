@@ -18,14 +18,14 @@ export class ListComponent implements OnInit {
     {
       id: 'aaaa',
       display_name: 'Smör 500g',
-      manufacturer: 'Arla',
+      manufacturer: 'Arla Foods',
       amount: 1
     },
     {
-      id: 'aaaa',
-      display_name: 'Smör 500g',
-      manufacturer: 'Arla',
-      amount: 1
+      id: '7310070001764',
+      display_name: 'Ramlösa Smultron 50cl',
+      manufacturer: 'Carlsberg Sweden AB',
+      amount: 3
     }
   ];
 
