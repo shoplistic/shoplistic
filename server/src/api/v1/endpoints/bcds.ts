@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Client } from 'pg';
 import { pgConf } from '../config';
+import { bearerGuard } from '../guards/bearer';
 
 const router = Router();
 
@@ -14,12 +15,12 @@ const router = Router();
 // });
 
 // TODO: Add auth
-router.get('/:barcode', (req, res) => {
+router.get('/:barcode', bearerGuard, (req, res) => {
   // req.params.barcode
   // Test barcode: 0000
   const db = new Client(pgConf);
   db.connect();
-  db.query('SELECT * FROM products WHERE barcode=$1', [req.params.barcode], async (error, result) => {
+  db.query('SELECT * FROM products WHERE barcode=$1', [req.params.barcode], (error, result) => {
 
     if (error) {
 
