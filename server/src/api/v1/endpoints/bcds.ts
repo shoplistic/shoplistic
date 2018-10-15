@@ -14,7 +14,6 @@ const router = Router();
 // router.delete('/', (req, res) => {
 // });
 
-// TODO: Add auth
 router.get('/:barcode', bearerGuard, (req, res) => {
   // req.params.barcode
   // Test barcode: 0000
