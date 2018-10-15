@@ -282,7 +282,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
   /bcds/{barcode}:
     get:
-      deprecated: true
       summary: Get info about a specific article
       tags:
         - Barcode Data Store
