@@ -28,7 +28,7 @@
 5.  Postgres Setup
     1. Run the setup script in the container. `docker exec shopper_postgres_1 /bin/bash /setup/install.sh`
 6.  Mongo Setup
-    1. Run the setup script in the container. `docker exec shopper_postgres_1 /bin/bash /setup/install.sh`
+    1. Run the setup script in the container. `docker exec shopper_mongo_1 /bin/bash /setup/install.sh`
 7.  Production Ready
     1. Stop the docker-container command with CTRL+C. (don't force-kill it)
     2. To automatically run shopper on boot, run `docker-compose up -d`

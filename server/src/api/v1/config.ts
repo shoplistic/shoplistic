@@ -1,5 +1,5 @@
 import { ClientConfig } from 'pg';
-import { env } from 'process';
+import { env, exit } from 'process';
 import * as log from '../../logger';
 
 const pgConf: ClientConfig = {
@@ -15,7 +15,8 @@ const mongoConf = `mongodb://${env.MONGO_USER}:${env.MONGO_PASSWORD}@${env.MONGO
 const JWT_SECRET: string = env.NODE_JWT_SECRET || '';
 
 if (!env.NODE_JWT_SECRET) {
-  log.warn('Environment variable NODE_JWT_SECRET not set! Using an empty string as its value!');
+  log.error('Environment variable NODE_JWT_SECRET not set!');
+  exit(-1);
 }
 
 export {
