@@ -10,7 +10,7 @@ app.listen(env.NODE_PORT, () => {
   log.info(`Server started on port ${env.NODE_PORT}`);
 });
 
-if (env.NODE_ENV === 'dev' || env.NODE_LOG_REQUESTS === 'true') {
+if (env.NODE_LOG_REQUESTS === 'true') {
   app.use(log.requests);
 }
 
@@ -18,7 +18,7 @@ if (env.NODE_ENV === 'dev') {
   app.use(cors());
 } else {
   app.use(cors({
-    origin: 'http://shopper.ink',
+    origin: 'https://shopper.ink' // TODO:? Set this with nginx instead?
   }));
 }
 
