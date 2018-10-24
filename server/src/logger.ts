@@ -14,13 +14,31 @@ const requests = morgan((tokens, req, res) => {
     .replace('PUT', c.bold(c.yellow('PUT')))
     .replace('DELETE', c.bold(c.red('DELETE')));
 
+  const status = (() => {
+
+    const s = Number(tokens.status(req, res));
+
+    if (s >= 500) {
+      return String(s).red.bold;
+    } else if (s >= 400) {
+      return String(s).yellow.bold;
+    } else if (s >= 300) {
+      return String(s).cyan.bold;
+    } else if (s >= 200) {
+      return String(s).green.bold;
+    } else {
+      return String(s);
+    }
+
+  })();
+
   const response = [
     '[REQUEST]'.black.bold,
     tokens['remote-addr'](req, res).replace('::ffff:', ''),
     `[${tokens.date(req, res, 'web')}]`,
     method,
     tokens.url(req, res),
-    tokens.status(req, res),
+    status
   ];
 
   if (req.headers.authorization) {
@@ -74,6 +92,12 @@ function panic(e: any, label = '') {
   console.log(label.panic || '[PANIC]'.panic, e);
 }
 
-
-
-export { requests, log, info, ok, warn, error, panic };
+export {
+  requests,
+  log,
+  info,
+  ok,
+  warn,
+  error,
+  panic
+};
