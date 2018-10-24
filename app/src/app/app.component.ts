@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './_services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +12,27 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   @ViewChild('sidebar') sidebar: ElementRef;
   @ViewChild('mdll') mdll: ElementRef;
+  @ViewChild('logout') logout: ElementRef;
 
   online = false;
   title = 'Shopper';
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private _auth: AuthService) {
     this.online = navigator.onLine;
   }
 
   ngAfterViewInit() {
+
     this.sidebar.nativeElement.addEventListener('click', () => {
       // routerLink does not act like a normal link, hence not closing the nav.
       this.mdll.nativeElement.MaterialLayout.toggleDrawer();
     });
+
+    this.logout.nativeElement.addEventListener('click', () => {
+      this._auth.logOut();
+      this.router.navigate(['/login']);
+    });
+
   }
 
   ngDoCheck() {
