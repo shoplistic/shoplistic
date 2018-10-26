@@ -12,7 +12,8 @@ const requests = morgan((tokens, req, res) => {
     .replace('POST', c.bold(c.green('POST')))
     .replace('PATCH', c.bold(c.cyan('PATCH')))
     .replace('PUT', c.bold(c.yellow('PUT')))
-    .replace('DELETE', c.bold(c.red('DELETE')));
+    .replace('DELETE', c.bold(c.red('DELETE')))
+    .replace('OPTIONS', c.bold(c.black('OPTIONS')));
 
   const status = (() => {
 
