@@ -11,10 +11,12 @@ app.listen(env.NODE_PORT, () => {
 });
 
 if (env.NODE_LOG_REQUESTS === 'true') {
+  log.warn('Logging requests!');
   app.use(log.requests);
 }
 
 if (env.NODE_ENV === 'dev') {
+  log.warn('Server running in dev mode!');
   app.use(cors());
 } else {
   app.use(cors({
