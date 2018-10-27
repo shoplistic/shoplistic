@@ -48,7 +48,6 @@ router.post('/', (req, res) => {
 
           } else {
 
-            console.log(_);
             res.status(201).json({
               message: 'Created'
             });
