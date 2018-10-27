@@ -20,7 +20,7 @@ if (env.NODE_ENV === 'dev') {
   app.use(cors());
 } else {
   app.use(cors({
-    origin: 'https://shopper.ink' // TODO:? Set this with nginx instead?
+    origin: 'https://app.shopper.ink' // TODO:? Set this with nginx instead?
   }));
 }
 
