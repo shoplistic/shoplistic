@@ -3,7 +3,8 @@
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title">{{ title }}</span>
       <div class="mdl-layout-spacer"></div>
-      <nav class="mdl-navigation">
+      <!-- <nav class="mdl-navigation" *ngIf="router.url !== '/login' && router.url !== '/register'"> -->
+      <nav class="mdl-navigation" *ngIf="loggedIn">
         <!-- <a class="mdl-navigation__link"><i class="material-icons">add</i></a> -->
         <a *ngIf="router.url !== '/add'" class="mdl-navigation__link" routerLink="/add"><i class="material-icons">add</i></a>
         <a *ngIf="router.url === '/add'" class="mdl-navigation__link" routerLink="/"><i class="material-icons">list_alt</i></a>
@@ -15,13 +16,15 @@
   <div #sidebar class="mdl-layout__drawer">
     <span class="mdl-layout-title">Shopper</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" routerLink="/">Shoppig list</a>
-      <a class="mdl-navigation__link" routerLink="/add">Add item</a>
-      <a class="mdl-navigation__link" routerLink="/scanner">Scan item</a>
-      <a class="mdl-navigation__link" routerLink="/profile">Profile</a>
-      <a class="mdl-navigation__link" routerLink="/settings">Settings</a>
+      <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/">Shoppig list</a>
+      <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/add">Add item</a>
+      <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/scanner">Scan item</a>
+      <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/profile">Profile</a>
+      <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/settings">Settings</a>
+      <a *ngIf="!loggedIn && router.url !== '/login'" class="mdl-navigation__link" routerLink="/login">Login</a>
+      <a *ngIf="!loggedIn && router.url !== '/register'" class="mdl-navigation__link" routerLink="/register">Register</a>
       <a class="mdl-navigation__link" href="javascript:location.reload(true)">Reload app</a>
-      <a class="mdl-navigation__link" #logout>Log out</a>
+      <a *ngIf="loggedIn" (click)="logOut()" class="mdl-navigation__link">Log out</a>
     </nav>
   </div>
   <main class="mdl-layout__content">

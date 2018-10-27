@@ -12,12 +12,12 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   @ViewChild('sidebar') sidebar: ElementRef;
   @ViewChild('mdll') mdll: ElementRef;
-  @ViewChild('logout') logout: ElementRef;
 
   online = false;
+  loggedIn = false;
   title = 'Shopper';
 
-  constructor(public router: Router, private _auth: AuthService) {
+  constructor(public router: Router, public _auth: AuthService) {
     this.online = navigator.onLine;
   }
 
@@ -28,15 +28,11 @@ export class AppComponent implements AfterViewInit, DoCheck {
       this.mdll.nativeElement.MaterialLayout.toggleDrawer();
     });
 
-    this.logout.nativeElement.addEventListener('click', () => {
-      this._auth.logOut();
-      this.router.navigate(['/login']);
-    });
-
   }
 
   ngDoCheck() {
     this.online = navigator.onLine;
+    this.loggedIn = this.router.url !== '/login' && this.router.url !== '/register';
 
     switch (this.router.url) {
 
@@ -66,6 +62,11 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
     }
 
+  }
+
+  logOut() {
+    this._auth.logOut();
+    this.router.navigate(['/login']);
   }
 
 }
