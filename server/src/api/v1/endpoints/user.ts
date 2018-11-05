@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 
   if (
     body.username &&
-    body.username.match(/^[a-z0-9_-]{4,20}$/) &&
+    body.username.match(/^[a-zA-Z0-9_-]{4,20}$/) &&
     body.password &&
     body.password.length >= 8 &&
     body.password.length <= 1024 &&
