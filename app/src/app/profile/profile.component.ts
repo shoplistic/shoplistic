@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../_services/profile.service';
 import { UserData } from '../_classes/user-data';
-import * as dateFormat from 'dateformat';
 
 @Component({
   selector: 'app-profile',
