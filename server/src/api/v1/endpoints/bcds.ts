@@ -5,15 +5,6 @@ import { bearerGuard } from '../guards/bearer';
 
 const router = Router();
 
-// router.post('/', (req, res) => {
-// });
-
-// router.patch('/', (req, res) => {
-// });
-
-// router.delete('/', (req, res) => {
-// });
-
 router.get('/:barcode', bearerGuard, (req, res) => {
   // req.params.barcode
   // Test barcode: 0000
@@ -44,5 +35,14 @@ router.get('/:barcode', bearerGuard, (req, res) => {
   });
 
 });
+
+// router.post('/', (req, res) => {
+// });
+
+// router.patch('/:barcode', (req, res) => {
+// });
+
+// router.delete('/:barcode', (req, res) => {
+// });
 
 export = router;

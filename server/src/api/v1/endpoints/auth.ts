@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 
       } else if (user) {
 
-        bcrypt.compare(req.body.password, user.password, (err, ok) => {
+        bcrypt.compare(req.body.password, user.hash, (err, ok) => {
 
           if (err) {
 
@@ -74,8 +74,5 @@ router.post('/', (req, res) => {
   }
 
 });
-
-// router.delete('/', (req, res) => {
-// });
 
 export = router;

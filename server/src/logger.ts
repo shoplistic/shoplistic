@@ -33,13 +33,28 @@ const requests = morgan((tokens, req, res) => {
 
   })();
 
+  const responseTime = (() => {
+
+    const ms = Number(tokens['response-time'](req, res));
+
+    if (ms < 10) {
+      return `${ms.toFixed(3)}ms`.green;
+    } else if (ms < 20) {
+      return `${ms.toFixed(3)}ms`.yellow;
+    } else {
+      return `${ms.toFixed(3)}ms`.red;
+    }
+
+  })();
+
   const response = [
     '[REQUEST]'.black.bold,
     tokens['remote-addr'](req, res).replace('::ffff:', ''),
     `[${tokens.date(req, res, 'web')}]`,
     method,
     tokens.url(req, res),
-    status
+    status,
+    responseTime
   ];
 
   if (req.headers.authorization) {
