@@ -22,27 +22,30 @@ ul {
         font-size: 12pt;
         outline: none;
         padding: 0.4em 0;
-      }
 
-      input:read-only {
+        &:read-only {
+          border-color: #333;
           color: #333;
+        }
+
       }
 
     }
 
     button {
         margin-left: 10px;
+
+        &:first-of-type {
+          margin-left: auto;
+        }
+
     }
 
-    button:first-of-type {
-      margin-left: auto;
+    h2 {
+      font-size: 1.4em;
+      margin: 0;
     }
 
   }
 
-}
-
-hr {
-  margin: auto;
-  max-width: 568px;
 }

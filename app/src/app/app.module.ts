@@ -11,17 +11,19 @@ import { ListComponent } from './list/list.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { Error404Component } from './error404/error404.component';
 
 // Services
 import { AuthService } from './_services/auth.service';
+import { ShoppingListService } from './_services/shopping-list.service';
+import { ProfileService } from './_services/profile.service';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { UnauthInterceptorService } from './_services/unauth-interceptor.service';
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
-import { Error404Component } from './error404/error404.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 
 // Service worker
 // import { ServiceWorkerModule } from '@angular/service-worker';
@@ -50,6 +52,8 @@ import { RegisterComponent } from './register/register.component';
   ],
   providers: [
     AuthService,
+    ShoppingListService,
+    ProfileService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

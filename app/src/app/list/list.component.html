@@ -6,7 +6,7 @@
       <span class="mdl-list__item-sub-title">{{ item.manufacturer }}, {{ item.amount }} pcs</span>
     </span>
     <span class="mdl-list__item-secondary-content">
-      <button class="mdl-list__item-secondary-action" href="#"><i class="material-icons">delete</i></button>
+      <button class="mdl-list__item-secondary-action" (click)="removeArticle(item._id)"><i class="material-icons">delete</i></button>
     </span>
   </li>
 </ul>

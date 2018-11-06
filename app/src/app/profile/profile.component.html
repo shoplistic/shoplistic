@@ -3,16 +3,23 @@
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="username">Username</label>
-        <input type="text" id="username" readonly value="olback">
+        <input type="text" id="username" readonly [value]="userData.username" />
+      </div>
+    </li>
+    <li class="mdl-list__item">
+      <div class="input-group">
+        <label for="regdate">Register date</label>
+        <input type="text" id="regdate" readonly [value]="regDate" />
       </div>
     </li>
   </ul>
 </form>
 
-<hr />
-
 <form>
   <ul class="mdl-list">
+    <li class="mdl-list__item">
+      <h2>Reset password</h2>
+    </li>
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="current_password">Old password</label>
@@ -34,6 +41,11 @@
     <li class="mdl-list__item">
       <button class="mdl-button mdl-js-button mdl-button--primary" type="button">
         Reset password
+      </button>
+    </li>
+    <li class="mdl-list__item">
+      <button class="mdl-button mdl-js-button mdl-button--accent" type="button">
+        Delete account
       </button>
     </li>
   </ul>

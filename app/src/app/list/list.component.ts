@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Article {
-  barcode: string;
-  display_name: string;
-  manufacturer?: string;
-  amount: number;
-}
+import { IShoppingListItem } from '../_classes/shopping-list-item';
+import { ShoppingListService } from '../_services/shopping-list.service';
 
 @Component({
   selector: 'app-list',
@@ -14,24 +9,36 @@ interface Article {
 })
 export class ListComponent implements OnInit {
 
-  shoppingList: Article[] = [
-    {
-      barcode: 'aaaa',
-      display_name: 'Smör 500g',
-      manufacturer: 'Arla Foods',
-      amount: 1
-    },
-    {
-      barcode: '7310070001764',
-      display_name: 'Ramlösa Smultron 50cl',
-      manufacturer: 'Carlsberg Sweden AB',
-      amount: 3
-    }
-  ];
+  shoppingList: IShoppingListItem[] = [];
 
-  constructor() { }
+  constructor(private _shoppinglistService: ShoppingListService) { }
 
   ngOnInit() {
+    this._shoppinglistService.getList().subscribe(
+      res => {
+        this.shoppingList = res;
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  removeArticle(id: string) {
+    this._shoppinglistService.remove(id).subscribe(
+      _res => {
+        console.log(_res);
+        for (let i = 0; i < this.shoppingList.length; i++) {
+          if (this.shoppingList[i]._id === id) {
+            this.shoppingList.splice(i, 1);
+            break;
+          }
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
 }
