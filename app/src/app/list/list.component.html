@@ -3,10 +3,10 @@
     <span class="mdl-list__item-primary-content">
       <!-- <i class="material-icons mdl-list__item-avatar">person</i> -->
       <span>{{ item.display_name }}</span>
-      <span class="mdl-list__item-sub-title">{{ item.manufacturer }}, {{ item.amount }} pcs</span>
+      <span class="mdl-list__item-sub-title">{{ item.manufacturer ? item.manufacturer + ',' : '' }} {{ item.amount }} pcs</span>
     </span>
     <span class="mdl-list__item-secondary-content">
-      <button class="mdl-list__item-secondary-action" (click)="removeArticle(item._id)"><i class="material-icons">delete</i></button>
+      <button class="mdl-list__item-secondary-action" (click)="removeItem(item._id)"><i class="material-icons">delete</i></button>
     </span>
   </li>
 </ul>
