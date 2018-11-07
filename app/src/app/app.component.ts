@@ -56,6 +56,10 @@ export class AppComponent implements AfterViewInit, DoCheck {
         this.title = 'Settings';
         break;
 
+      case '/about':
+        this.title = 'About';
+        break;
+
       default:
         this.title = 'Shopper';
         break;

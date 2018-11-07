@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import { env } from 'process';
+import { short as gitRevShort } from 'git-rev-sync';
 import * as log from './logger';
 import * as api from './api/api';
 
@@ -24,7 +25,15 @@ if (env.NODE_ENV === 'dev') {
   }));
 }
 
+// Use API v1
 app.use('/v1', api.v1);
+
+// Version
+app.get('/version', async (_req, res) => {
+  res.json({
+    version: gitRevShort()
+  });
+});
 
 app.all('**', (_req, res) => {
   res.status(501).json({

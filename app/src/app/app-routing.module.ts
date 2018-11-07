@@ -10,6 +10,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { Error404Component } from './error404/error404.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AboutComponent } from './about/about.component';
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: '**',

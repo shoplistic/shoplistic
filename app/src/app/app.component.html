@@ -25,6 +25,7 @@
       <a *ngIf="!loggedIn && router.url !== '/register'" class="mdl-navigation__link" routerLink="/register">Register</a>
       <a class="mdl-navigation__link" href="javascript:location.reload(true)">Reload app</a>
       <a *ngIf="loggedIn" (click)="logOut()" class="mdl-navigation__link">Log out</a>
+      <a class="mdl-navigation__link" routerLink="/about">About shopper</a>
     </nav>
   </div>
   <main class="mdl-layout__content">

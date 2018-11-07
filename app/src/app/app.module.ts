@@ -26,6 +26,7 @@ import { UnauthInterceptorService } from './_services/unauth-interceptor.service
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
+import { AboutComponent } from './about/about.component';
 
 // Service worker
 // import { ServiceWorkerModule } from '@angular/service-worker';
@@ -44,7 +45,8 @@ import { AuthGuard } from './_guards/auth.guard';
     Error404Component,
     LoginComponent,
     RegisterComponent,
-    InfoBarComponent
+    InfoBarComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
