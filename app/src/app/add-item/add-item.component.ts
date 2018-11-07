@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ShoppingListItem } from '../_classes/shopping-list-item';
 import { ShoppingListService } from '../_services/shopping-list.service';
+import { InfoBarService } from '../_services/info-bar.service';
 
 @Component({
   selector: 'app-add-item',
@@ -13,7 +14,7 @@ export class AddItemComponent implements AfterViewInit {
 
   item = new ShoppingListItem('', '', '', 1);
 
-  constructor(private _shoppinlistService: ShoppingListService) { }
+  constructor(private _shoppinlistService: ShoppingListService, private _infobarService: InfoBarService) { }
 
   ngAfterViewInit() {
     this.af.nativeElement.focus();
@@ -22,8 +23,9 @@ export class AddItemComponent implements AfterViewInit {
   onSubmit() {
     console.log(this.item);
     this._shoppinlistService.add(this.item).subscribe(
-      res => {
-        console.log('added');
+      _res => {
+        this._infobarService.show(`${this.item.display_name} added to the shopping list`, 3000);
+        this.item = new ShoppingListItem('', '', '', 1);
       },
       err => {
         console.error(err);

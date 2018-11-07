@@ -14,11 +14,13 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { Error404Component } from './error404/error404.component';
+import { InfoBarComponent } from './info-bar/info-bar.component';
 
 // Services
 import { AuthService } from './_services/auth.service';
 import { ShoppingListService } from './_services/shopping-list.service';
 import { ProfileService } from './_services/profile.service';
+import { InfoBarService } from './_services/info-bar.service';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { UnauthInterceptorService } from './_services/unauth-interceptor.service';
 
@@ -41,7 +43,8 @@ import { AuthGuard } from './_guards/auth.guard';
     SettingsComponent,
     Error404Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    InfoBarComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { AuthGuard } from './_guards/auth.guard';
     AuthService,
     ShoppingListService,
     ProfileService,
+    InfoBarService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
