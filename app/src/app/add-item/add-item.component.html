@@ -3,13 +3,13 @@
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="display_name">Name</label>
-        <input #af name="display_name" type="text" id="display_name" autocomplete="item-name" required [(ngModel)]="item.display_name" #display_name="ngModel" />
+        <input #af name="display_name" type="text" id="display_name" autocomplete="item-name" required [(ngModel)]="item.display_name" #display_name="ngModel" [class.invalid]="display_name.invalid && display_name.touched && display_name.dirty" />
       </div>
     </li>
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="manufacturer">Manufacturer</label>
-        <input name="manufacturer" type="text" id="manufacturer" autocomplete="manufacturer" required [(ngModel)]="item.manufacturer" #manufacturer="ngModel" />
+        <input name="manufacturer" type="text" id="manufacturer" autocomplete="manufacturer" [(ngModel)]="item.manufacturer" #manufacturer="ngModel" [class.invalid]="manufacturer.invalid && manufacturer.touched && manufacturer.dirty" />
       </div>
     </li>
     <li class="mdl-list__item">
@@ -19,7 +19,7 @@
       </div>
     </li>
     <li class="mdl-list__item">
-      <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit">
+      <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit" [disabled]="loginForm.form.invalid">
         Add item
       </button>
     </li>

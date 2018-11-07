@@ -22,6 +22,11 @@ ul {
         font-size: 12pt;
         outline: none;
         padding: 0.4em 0;
+
+        &.invalid {
+          border-color: #a00;
+        }
+
       }
 
     }
