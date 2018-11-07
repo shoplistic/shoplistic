@@ -28,6 +28,10 @@ ul {
           color: #333;
         }
 
+        &.invalid {
+          border-color: #a00;
+        }
+
       }
 
     }
@@ -44,6 +48,12 @@ ul {
     h2 {
       font-size: 1.4em;
       margin: 0;
+    }
+
+    small {
+      margin-top: 1em;
+      display: block;
+      color: #a00;
     }
 
   }

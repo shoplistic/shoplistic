@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../_services/profile.service';
-import { UserData } from '../_classes/user-data';
+import { UserData, PasswordReset } from '../_classes/user-data';
+import { InfoBarService } from '../_services/info-bar.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,10 @@ export class ProfileComponent implements OnInit {
   userData = new UserData('', 0);
   regDate = '';
 
-  constructor(private _profileService: ProfileService) { }
+  passwordReset = new PasswordReset('', '', '');
+  submitted = false;
+
+  constructor(private _profileService: ProfileService, private _infobarService: InfoBarService) { }
 
   ngOnInit() {
 
@@ -23,6 +27,25 @@ export class ProfileComponent implements OnInit {
       },
       err => {
         console.error(err);
+      }
+    );
+
+  }
+
+  prSubmit() {
+
+    this.submitted = true;
+
+    this._profileService.resetPassword(this.passwordReset).subscribe(
+      res => {
+        this._infobarService.show('Password updated', 3000);
+        // this.passwordReset = new PasswordReset('', '', '');
+        // this.submitted = false;
+      },
+      err => {
+        this._infobarService.show('Invalid password', 3000);
+        this.passwordReset.old_password = '';
+        this.submitted = false;
       }
     );
 

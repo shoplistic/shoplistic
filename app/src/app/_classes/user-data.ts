@@ -5,3 +5,11 @@ export class UserData {
   }
 
 }
+
+export class PasswordReset {
+
+  constructor(public old_password: string, public new_password: string, public password_repeat: string) {
+
+  }
+
+}
