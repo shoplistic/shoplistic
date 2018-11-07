@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS products;
 CREATE TABLE products (
   barcode VARCHAR(32) PRIMARY KEY NOT NULL,
   display_name VARCHAR(255) NOT NULL,
-  manufacturer VARCHAR(255)
+  manufacturer VARCHAR(255) NOT NULL
 );
 
 
