@@ -15,7 +15,7 @@ ul {
 button {
   border: none;
   background-color: transparent;
-  color: #f77;
+  color: #f55;
   cursor: pointer;
   outline: none;
 }
@@ -30,10 +30,11 @@ div {
   transform: translate(-50%, -50%);
 
   i {
-    font-size: calc(96pt + (256 - 96) * (100vw - 200px) / (600 - 200));
+    $fs: calc(100px + (100 - 50) * (100vw - 200px) / (600 - 200));
+    font-size: $fs;
     display: block;
     margin: auto;
-    width: calc(96pt + (256 - 96) * (100vw - 200px) / (600 - 200));
+    width: $fs;
     color: #ccc;
   }
 
