@@ -140,7 +140,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
   /profile/password: # Update users password
     patch:
-      deprecated: true
       summary: Update password
       tags:
         - Profile
@@ -170,7 +169,18 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    default: 'Unauthorized'
+                  logout:
+                    type: boolean
+                    default: false
   /shoppinglist:
     get: # Get shopping list
       summary: Get all items in the shopping list
@@ -188,7 +198,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
     post: # Add to shoppinglist
-      summary: Add to shoppinglist
+      summary: Add to shopping list
       tags:
         - Shopping list
       requestBody:
@@ -223,7 +233,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
     patch: # Add to shoppinglist
-      summary: Add to shoppinglist
+      summary: Edit item in shopping list
       deprecated: true
       tags:
         - Shopping list
