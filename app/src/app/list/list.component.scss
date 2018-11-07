@@ -24,6 +24,10 @@ div {
   display: block;
   max-width: 600px;
   margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   i {
     font-size: calc(96pt + (256 - 96) * (100vw - 200px) / (600 - 200));

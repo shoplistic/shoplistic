@@ -7,4 +7,12 @@ export interface IShoppingListItem {
 }
 
 export class ShoppingListItem {
+
+  constructor(
+    public barcode: string,
+    public display_name: string,
+    public manufacturer: string,
+    public amount: number
+  ) { }
+
 }

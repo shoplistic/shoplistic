@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { resolve as urlResolve } from 'url';
-import { IShoppingListItem } from '../_classes/shopping-list-item';
+import { ShoppingListItem, IShoppingListItem } from '../_classes/shopping-list-item';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,12 @@ export class ShoppingListService {
   getList() {
 
     return this._http.get<IShoppingListItem[]>(urlResolve(environment.apiUrl, 'shoppinglist'));
+
+  }
+
+  add(item: ShoppingListItem) {
+
+    return this._http.post(urlResolve(environment.apiUrl, 'shoppinglist'), item);
 
   }
 

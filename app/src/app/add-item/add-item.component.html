@@ -1,25 +1,25 @@
-<form action="#">
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
   <ul class="mdl-list">
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="display_name">Name</label>
-        <input type="text" id="display_name">
+        <input #af name="display_name" type="text" id="display_name" autocomplete="item-name" required [(ngModel)]="item.display_name" #display_name="ngModel" />
       </div>
     </li>
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="manufacturer">Manufacturer</label>
-        <input type="text" id="manufacturer">
+        <input name="manufacturer" type="text" id="manufacturer" autocomplete="manufacturer" required [(ngModel)]="item.manufacturer" #manufacturer="ngModel" />
       </div>
     </li>
     <li class="mdl-list__item">
       <div class="input-group">
         <label for="amount">Amount</label>
-        <input type="number" value="1" min="1" max="999" id="amount">
+        <input name="amount" type="number" id="amount" autocomplete="amount" required [(ngModel)]="item.amount" #amount="ngModel" />
       </div>
     </li>
     <li class="mdl-list__item">
-      <button class="mdl-button mdl-button--raised mdl-button--colored" type="button">
+      <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit">
         Add item
       </button>
     </li>
