@@ -19,3 +19,24 @@ button {
   cursor: pointer;
   outline: none;
 }
+
+div {
+  display: block;
+  max-width: 600px;
+  margin: auto;
+
+  i {
+    font-size: calc(96pt + (256 - 96) * (100vw - 200px) / (600 - 200));
+    display: block;
+    margin: auto;
+    width: calc(96pt + (256 - 96) * (100vw - 200px) / (600 - 200));
+    color: #ccc;
+  }
+
+  p {
+    text-align: center;
+    font-size: 16pt;
+    color: #ccc;
+  }
+
+}
