@@ -89,7 +89,7 @@ router.delete('/', bearerGuard, (req, res) => {
 
     } else if (user) {
 
-      // User deleted?
+      // User deleted
       res.status(200).json({
         message: 'Ok'
       });
