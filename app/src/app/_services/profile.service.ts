@@ -23,4 +23,10 @@ export class ProfileService {
 
   }
 
+  deleteAccount() {
+
+    return this._http.delete(urlResolve(environment.apiUrl, 'user'));
+
+  }
+
 }

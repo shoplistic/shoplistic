@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProfileService } from '../_services/profile.service';
 import { UserData, PasswordReset } from '../_classes/user-data';
 import { InfoBarService } from '../_services/info-bar.service';
+import { AuthService } from '../_services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +20,12 @@ export class ProfileComponent implements OnInit {
   passwordReset = new PasswordReset('', '', '');
   submitted = false;
 
-  constructor(private _profileService: ProfileService, private _infobarService: InfoBarService) { }
+  constructor(
+    private _profileService: ProfileService,
+    private _infobarService: InfoBarService,
+    private _authService: AuthService,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
 
@@ -54,11 +61,24 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteProfileSubmit() {
-    // TODO:
+
+    this._profileService.deleteAccount().subscribe(
+      res => {
+        this._authService.logOut();
+        this._router.navigate(['/login']);
+      },
+      err => {
+        this._infobarService.show('An error occurred', 5000);
+        this.toggleDeleteModal();
+      }
+    );
+
   }
 
   toggleDeleteModal() {
+
     this.deleteModal.nativeElement.classList.toggle('show');
+
   }
 
 }
