@@ -30,7 +30,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
         //   focusMode: 'continuous'
         // },
         locator: {
-          patchSize: 'large', // 'medium'?
+          patchSize: 'medium', // 'medium' | 'large'?
           halfSample: true
         },
         decoder: {
@@ -126,7 +126,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
 
 }
 
-function common(arr: Array<any>) {
+function common(arr: Array<string>) {
   return arr.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop();
 }
 
