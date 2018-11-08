@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProfileService } from '../_services/profile.service';
 import { UserData, PasswordReset } from '../_classes/user-data';
 import { InfoBarService } from '../_services/info-bar.service';
@@ -9,6 +9,8 @@ import { InfoBarService } from '../_services/info-bar.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
+  @ViewChild('deleteModal') deleteModal: ElementRef;
 
   userData = new UserData('', 0);
   regDate = '';
@@ -49,6 +51,14 @@ export class ProfileComponent implements OnInit {
       }
     );
 
+  }
+
+  deleteProfileSubmit() {
+    // TODO:
+  }
+
+  toggleDeleteModal() {
+    this.deleteModal.nativeElement.classList.toggle('show');
   }
 
 }

@@ -46,9 +46,24 @@
       </button>
     </li>
     <li class="mdl-list__item">
-      <button class="mdl-button mdl-js-button mdl-button--accent" type="button">
+      <button class="mdl-button mdl-js-button mdl-button--accent" type="button" (click)="toggleDeleteModal()">
         Delete account
       </button>
     </li>
   </ul>
 </form>
+
+<div #deleteModal class="deleteModal">
+  <div class="shadow"></div>
+  <div class="content">
+    <p>Are you sure you want to delete your account? This can not be undone!</p>
+    <div class="ilb">
+      <button class="mdl-button mdl-js-button mdl-button--primary" (click)="toggleDeleteModal()">
+        No
+      </button>
+      <button class="mdl-button mdl-js-button mdl-button--accent" (click)="deleteProfileSubmit()">
+        Yes, delete
+      </button>
+    </div>
+  </div>
+</div>
