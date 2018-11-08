@@ -19,7 +19,6 @@ export class UnauthInterceptorService implements HttpInterceptor {
 
         // TODO: Change this?
         if (err.status === 401 && err.error.logout !== false) {
-          // console.log('unauthorized');
           this._authService.logOut();
           this._router.navigate(['/login']);
         }

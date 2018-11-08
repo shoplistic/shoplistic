@@ -21,7 +21,6 @@ export class AddItemComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    console.log(this.item);
     this._shoppinlistService.add(this.item).subscribe(
       _res => {
         this._infobarService.show(`${this.item.display_name} added to the shopping list`, 3000);

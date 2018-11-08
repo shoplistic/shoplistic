@@ -28,7 +28,7 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    console.log(this.registerData);
+
     this.submitted = true;
     this.error = '';
 
@@ -44,7 +44,6 @@ export class RegisterComponent implements AfterViewInit {
             this.error = 'Username is already taken';
           } else {
             this.error = err.error.message ? err.error.message : err.message;
-            console.log(err);
           }
         }
       );
