@@ -86,7 +86,6 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
     delete:
-      deprecated: true
       summary: Delete user
       tags:
         - User
