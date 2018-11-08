@@ -56,7 +56,9 @@ button.refresh-fab {
   bottom: 20px;
   right: 20px;
   transform-origin: center;
-  transition: transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, text-shadow .2s ease-in-out;
+  box-shadow: none;
+  text-shadow: none;
 
   &:hover {
     transform: rotate(180deg);
@@ -64,6 +66,7 @@ button.refresh-fab {
 
   &:active {
     transform: rotate(270deg);
+    text-shadow: 0 0 4px #fff;
   }
 
 }
