@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
             let payload = { subject: user._id }
             let token = jwt.sign(payload, JWT_SECRET);
 
-            res.json({
+            res.status(200).json({
               username: user.username,
               bearer: token
             });

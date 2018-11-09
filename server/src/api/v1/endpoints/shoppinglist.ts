@@ -65,7 +65,7 @@ router.post('/', bearerGuard, (req, res) => {
           });
           user.save();
 
-          res.json({
+          res.status(201).json({
             message: 'Created'
           });
 
@@ -115,7 +115,7 @@ router.delete('/', bearerGuard, (req, res) => {
 
             user.shoppingList.splice(i, 1);
             user.save();
-            res.json({
+            res.status(200).json({
               message: 'Ok'
             });
 

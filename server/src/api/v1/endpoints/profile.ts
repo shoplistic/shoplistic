@@ -25,7 +25,7 @@ router.get('/', bearerGuard, (req, res) => {
       // Don't respond with all properties
       const { username, registerDate } = user;
 
-      res.json({
+      res.status(200).json({
         username,
         registerDate
       });
@@ -81,7 +81,7 @@ router.patch('/password', bearerGuard, (req, res) => {
 
           //   } else if (new_user) {
 
-          //     res.json({
+          //     res.status(200).json({
           //       message: 'Ok'
           //     });
 

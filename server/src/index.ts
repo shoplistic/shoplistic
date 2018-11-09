@@ -30,7 +30,7 @@ app.use('/v1', api.v1);
 
 // Version
 app.get('/version', async (_req, res) => {
-  res.json({
+  res.status(200).json({
     version: gitRevShort()
   });
 });

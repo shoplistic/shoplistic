@@ -29,12 +29,12 @@ router.get('/', swaggerUi.setup(swaggerDoc, {
 }));
 
 router.get('/json', (_req, res) => {
-  res.json(swaggerDoc);
+  res.status(200).json(swaggerDoc);
 });
 
 router.get('/yaml', (_req, res) => {
   res.header('Content-Type', 'text/yaml');
-  res.send(yaml.stringify(swaggerDoc, 100, 2));
+  res.status(200).send(yaml.stringify(swaggerDoc, 100, 2));
 });
 
 export = router;
