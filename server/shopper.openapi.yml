@@ -274,7 +274,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
   /bcds: # Add / Edit / Delete article
     post:
-      deprecated: true
       summary: Add article to the barcode database
       tags:
         - Barcode Data Store
@@ -307,45 +306,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '409':
           $ref: '#/components/responses/Conflict'
-  /bcds/{barcode}:
-    get:
-      summary: Get info about a specific article
-      tags:
-        - Barcode Data Store
-      responses:
-        '200':
-          description: Article object
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  barcode:
-                    type: string
-                    example: 7310070001764
-                  display_name:
-                    type: string
-                    example: Ramlösa Smultron 50cl
-                  manufacturer:
-                    type: string
-                    example: Carlsberg Sweden
-                required:
-                  - barcode
-                  - display_name
-                  - manufacturer
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      parameters:
-        - name: barcode
-          in: path
-          description: Barcode string
-          required: true
-          schema:
-            type: string
     patch:
-      deprecated: true
       summary: Edit an article in the barcode database
       tags:
         - Barcode Data Store
@@ -376,18 +337,22 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
-      parameters:
-        - name: barcode
-          in: path
-          description: Barcode string
-          required: true
-          schema:
-            type: string
     delete:
-      deprecated: true
       summary: Delete article from the barcode database
       tags:
         - Barcode Data Store
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    example: 7310070001764
+                required:
+                  - barcode
       responses:
         '200':
           $ref: '#/components/responses/Ok'
@@ -395,6 +360,36 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+  /bcds/{barcode}:
+    get:
+      summary: Get info about a specific article
+      tags:
+        - Barcode Data Store
+      responses:
+        '200':
+          description: Article object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  barcode:
+                    type: string
+                    example: 7310070001764
+                  display_name:
+                    type: string
+                    example: Ramlösa Smultron 50cl
+                  manufacturer:
+                    type: string
+                    example: Carlsberg Sweden
+                required:
+                  - barcode
+                  - display_name
+                  - manufacturer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
       parameters:
         - name: barcode
           in: path
