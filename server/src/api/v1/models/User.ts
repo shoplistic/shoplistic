@@ -25,9 +25,9 @@ const UserSchema: Schema = new Schema({
   },
   shoppingList: [ShoppingListItemSchema],
   permissions: {
-    type: Object,
-    default: {
-      bcdsWrite: false
+    bcdsWrite: {
+      type: Boolean,
+      default: false
     }
   },
   registerDate: {
