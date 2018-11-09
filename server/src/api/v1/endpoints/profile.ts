@@ -1,7 +1,6 @@
 import { Router, json as bodyParser } from 'express';
 import * as User from '../models/User';
 import * as bcrypt from 'bcrypt';
-// import * as log from '../../../logger';
 import { bearerGuard } from '../guards/bearer';
 
 const router = Router();

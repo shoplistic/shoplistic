@@ -1,10 +1,8 @@
 import { Router, json as bodyParser } from 'express';
 import * as User from '../models/User';
-import * as log from '../../../logger';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
-// import { bearerGuard } from '../guards/bearer';
 
 const router = Router();
 
@@ -12,7 +10,10 @@ router.use(bodyParser());
 
 router.post('/', (req, res) => {
 
-  const body = req.body;
+  const body = {
+    username: req.body.username ? String(req.body.username).trim() : '',
+    password: req.body.password ? String(req.body.password) : '',
+  }
 
   if (body.username && body.password) {
 
@@ -20,14 +21,13 @@ router.post('/', (req, res) => {
 
       if (err) {
 
-        log.error(err);
         res.status(500).json({
           message: 'Internal Server Error'
         });
 
       } else if (user) {
 
-        bcrypt.compare(req.body.password, user.hash, (err, ok) => {
+        bcrypt.compare(body.password, user.hash, (err, ok) => {
 
           if (err) {
 

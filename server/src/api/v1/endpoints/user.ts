@@ -9,12 +9,16 @@ router.use(bodyParser());
 
 router.post('/', (req, res) => {
 
-  const body = req.body;
+  // const body = req.body;
+
+  const body = {
+    username: req.body.username ? String(req.body.username).trim() : '',
+    password: req.body.password ? String(req.body.password) : '',
+    password_repeat: req.body.password_repeat ? String(req.body.password_repeat) : '',
+  }
 
   if (
-    body.username &&
     body.username.match(/^[a-zA-Z0-9_-]{4,20}$/) &&
-    body.password &&
     body.password.length >= 8 &&
     body.password.length <= 1024 &&
     body.password === body.password_repeat
@@ -60,7 +64,7 @@ router.post('/', (req, res) => {
 
     });
 
-  } else if (body.password !== body.passwordRepeat) {
+  } else if (body.password !== body.password_repeat) {
 
     res.status(422).json({
       message: 'Unprocessable Entity'

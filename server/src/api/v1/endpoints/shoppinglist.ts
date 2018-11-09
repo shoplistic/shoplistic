@@ -39,12 +39,12 @@ router.get('/', bearerGuard, (req, res) => {
 
 router.post('/', bearerGuard, (req, res) => {
 
-  if (
-    typeof req.body.barcode === 'string' &&
-    req.body.display_name.length > 3 &&
-    typeof req.body.manufacturer === 'string' &&
-    req.body.amount > 0
-    ) {
+  const barcode = req.body.barcode ? String(req.body.barcode).trim() : '';
+  const display_name = req.body.display_name ? String(req.body.display_name).trim() : '';
+  const manufacturer = req.body.manufacturer ? String(req.body.manufacturer).trim() : '';
+  const amount = req.body.amount ? Number(req.body.amount) : 0;
+
+  if (display_name.length > 3 && amount > 0) {
 
       // @ts-ignore
       User.findById(req.userId, (err, user) => {
@@ -58,10 +58,10 @@ router.post('/', bearerGuard, (req, res) => {
         } else if (user) {
 
           user.shoppingList.push({
-            barcode: req.body.barcode,
-            display_name: req.body.display_name,
-            manufacturer: req.body.manufacturer,
-            amount: req.body.amount
+            barcode: barcode,
+            display_name: display_name,
+            manufacturer: manufacturer,
+            amount: amount
           });
           user.save();
 
@@ -96,7 +96,9 @@ router.post('/', bearerGuard, (req, res) => {
 // Delete an item frome the shoppinglist
 router.delete('/', bearerGuard, (req, res) => {
 
-  if (req.body.id) {
+  const itemId = req.body.id ? String(req.body.id).trim() : '';
+
+  if (itemId) {
 
     // @ts-ignore
     User.findById(req.userId, (err, user) => {
@@ -111,7 +113,7 @@ router.delete('/', bearerGuard, (req, res) => {
 
         for (let i = 0; i < user.shoppingList.length; i++) {
 
-          if (String(user.shoppingList[i]._id) === String(req.body.id)) {
+          if (String(user.shoppingList[i]._id) === String(itemId)) {
 
             user.shoppingList.splice(i, 1);
             user.save();
