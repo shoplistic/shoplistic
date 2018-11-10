@@ -57,12 +57,29 @@ router.post('/', bearerGuard, (req, res) => {
 
         } else if (user) {
 
-          user.shoppingList.push({
-            barcode: barcode,
-            display_name: display_name,
-            manufacturer: manufacturer,
-            amount: amount
-          });
+          let changed = false;
+
+          for (let item of user.shoppingList) {
+
+            if (item.barcode === barcode) {
+              item.amount++;
+              changed = true;
+              break;
+            }
+
+          }
+
+          if (!changed) {
+
+            user.shoppingList.push({
+              barcode: barcode,
+              display_name: display_name,
+              manufacturer: manufacturer,
+              amount: amount
+            });
+
+          }
+
           user.save();
 
           res.status(201).json({
