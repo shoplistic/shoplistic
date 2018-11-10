@@ -1,5 +1,9 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import * as Quagga from 'quagga';
+import { Bcds } from '../_classes/bcds';
+import { BcdsService } from '../_services/bcds.service';
+import { ShoppingListService } from '../_services/shopping-list.service';
+import { InfoBarService } from '../_services/info-bar.service';
 
 @Component({
   selector: 'app-scanner',
@@ -8,11 +12,20 @@ import * as Quagga from 'quagga';
 })
 export class ScannerComponent implements AfterViewInit, OnDestroy {
 
-  values: any[] = [];
-  err: string;
-  barcodeValue: string;
+  @ViewChild('addModal') addModal: ElementRef;
 
-  constructor() {}
+  barcodeSamples: string[] = [];
+  barcode = '';
+  item = new Bcds('', '', '');
+  active = true;
+  requiredScans = 25;
+  err: string;
+
+  constructor(
+    private _bcdsService: BcdsService,
+    private _infobarService: InfoBarService,
+    private _shoppinglistService: ShoppingListService
+  ) {}
 
   ngAfterViewInit() {
     Quagga.init(
@@ -34,7 +47,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
           halfSample: true
         },
         decoder: {
-          readers: ['ean_reader', 'upc_reader'],
+          readers: ['ean_reader', 'ean_8_reader', 'upc_reader'],
           debug: {
             showCanvas: true,
             showPatches: true,
@@ -63,18 +76,36 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     );
 
     Quagga.onDetected(data => {
-      if (data) {
-        this.values.push(data.codeResult.code);
 
-        if (this.values.length > 50) {
-          // this.barcodeValue = foo(this.values);
-          this.barcodeValue = common(this.values);
+      if (data && this.active) {
+
+        this.barcodeSamples.push(data.codeResult.code);
+
+        if (this.barcodeSamples.length > this.requiredScans) {
+
+          this.active = false;
+          this.barcode = common(this.barcodeSamples);
+          this.barcodeSamples = [];
           navigator.vibrate(75);
-          this.values = [];
+
+          this._bcdsService.get(this.barcode).subscribe(
+            res => {
+              this.item = res;
+              this.toggleAddModal();
+            },
+            err => {
+              this.active = true;
+              if (err.status === 404) {
+                this._infobarService.show(`Barcode ${this.barcode} not found`, 3000);
+              }
+            }
+          );
+
         }
 
         // console.log(data.codeResult.code);
       }
+
     });
 
     Quagga.onProcessed(result => {
@@ -124,9 +155,36 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     Quagga.stop();
   }
 
+  toggleAddModal() {
+
+    this.active = !this.addModal.nativeElement.classList.toggle('show');
+
+  }
+
+  submit(item: Bcds) {
+
+    console.log(item);
+    console.log('submitted');
+    this.toggleAddModal();
+
+    this._shoppinglistService.add({
+      barcode: item.barcode,
+      display_name: item.display_name,
+      manufacturer: item.manufacturer, 
+      amount: 1
+    }).subscribe(
+      res => {
+        this._infobarService.show(`${item.display_name} added to the shopping list`, 3000);
+      },
+      err => {
+        this._infobarService.show(`And error occurred`, 3000);
+      }
+    );
+
+  }
+
 }
 
 function common(arr: Array<string>) {
   return arr.sort((a, b) => arr.filter(v => v === a).length - arr.filter(v => v === b).length).pop();
 }
-
