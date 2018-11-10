@@ -6,7 +6,7 @@ services:
     image: node:10-stretch
     restart: ${DOCKER_RESTART}
     command: ${NODE_COMMAND}
-    tty: ${DOCKER_TTY}
+    tty: true
     ports:
       - "${NODE_PORT}:${NODE_PORT}" # host:container
     links:
