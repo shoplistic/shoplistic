@@ -170,7 +170,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     this._shoppinglistService.add({
       barcode: item.barcode,
       display_name: item.display_name,
-      manufacturer: item.manufacturer, 
+      manufacturer: item.manufacturer,
       amount: 1
     }).subscribe(
       res => {
