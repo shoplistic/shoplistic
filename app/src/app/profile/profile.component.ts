@@ -46,12 +46,12 @@ export class ProfileComponent implements OnInit {
     this.submitted = true;
 
     this._profileService.resetPassword(this.passwordReset).subscribe(
-      res => {
+      _res => {
         this._infobarService.show('Password updated', 3000);
         // this.passwordReset = new PasswordReset('', '', '');
         // this.submitted = false;
       },
-      err => {
+      _err => {
         this._infobarService.show('Invalid password', 3000);
         this.passwordReset.old_password = '';
         this.submitted = false;
@@ -63,11 +63,11 @@ export class ProfileComponent implements OnInit {
   deleteProfileSubmit() {
 
     this._profileService.deleteAccount().subscribe(
-      res => {
+      _res => {
         this._authService.logOut();
         this._router.navigate(['/login']);
       },
-      err => {
+      _err => {
         this._infobarService.show('An error occurred', 5000);
         this.toggleDeleteModal();
       }
