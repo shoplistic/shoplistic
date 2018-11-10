@@ -29,10 +29,10 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AboutComponent } from './about/about.component';
 
 // Service worker
-// import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // Environment
-// import { environment } from '../environments/environment';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { AboutComponent } from './about/about.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AuthService,
