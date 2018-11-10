@@ -19,11 +19,11 @@ if (env.NODE_LOG_REQUESTS === 'true') {
 if (env.NODE_ENV === 'dev') {
   log.warn('Server running in dev mode!');
   app.use(cors());
-} /* else {
+} else {
   app.use(cors({
-    origin: 'https://app.shopper.ink' // TODO:? Set this with nginx instead?
+    origin: 'https://app.shopper.ink'
   }));
-} */
+}
 
 // Use API v1
 app.use('/v1', api.v1);
