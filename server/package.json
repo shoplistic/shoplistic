@@ -4,7 +4,7 @@
   "description": "",
   "main": "out/index.js",
   "scripts": {
-    "prestart": "npm install && npm rebuild && npm run ts:compile",
+    "prestart": "npm install && npm run ts:compile",
     "start": "node out/index",
     "dev": "node devserver",
     "ts:compile": "tsc -p ./",
