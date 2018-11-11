@@ -50,7 +50,7 @@ cp .env.sample .env
 # Generate random passwords and tokens
 for i in `seq 1 3`; do
   R=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-  sed -i -e "0,/__PLACEHOLDER__/{s/__PLACEHOLDER__/$R/}" .env2
+  sed -i -e "0,/__PLACEHOLDER__/{s/__PLACEHOLDER__/$R/}" .env
 done
 
 # Start docker containers
