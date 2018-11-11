@@ -56,8 +56,8 @@ done
 # Start docker containers
 docker-compose up -d
 
-# Wait 5 seconds to make sure the containers are up and running
-sleep 5
+# Wait 30 seconds to make sure the containers are up and running
+sleep 30
 
 # Get the folder name, docker uses it as a prefix
 DIR=$(basename $PWD)
