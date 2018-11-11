@@ -6,3 +6,5 @@
 * Show infobar on refresh
 * Unit tests for the API
 * Unit tests for the Angular App
+* Dark Theme?
+* Add items to the bcds.
