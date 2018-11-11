@@ -63,8 +63,8 @@ sleep 5
 DIR=$(basename $PWD)
 
 # Execute setup scripts
-docker exec $(docker ps | grep shopper-app_mongo | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/setup/install.sh"
-docker exec $(docker ps | grep shopper-app_postgres | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/setup/install.sh"
+docker exec $(docker ps | grep ${DIR}_mongo | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/setup/install.sh"
+docker exec $(docker ps | grep ${DIR}_postgres | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/setup/install.sh"
 
 # Restart the containers
 docker-compose restart
