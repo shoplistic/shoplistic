@@ -61,7 +61,7 @@ router.post('/', bearerGuard, (req, res) => {
 
           for (let item of user.shoppingList) {
 
-            if (item.barcode === barcode) {
+            if (item.barcode === barcode && !!barcode) {
               item.amount++;
               changed = true;
               break;
