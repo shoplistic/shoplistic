@@ -78,8 +78,6 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   showInstallPrompt() {
 
-    // @ts-ignore
-    // this.pwa.prompt.prompt();
     this.pwa.showInstallPrompt();
 
   }
