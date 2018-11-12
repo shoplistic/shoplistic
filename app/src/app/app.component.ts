@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './_services/auth.service';
+import { PwaService } from './_services/pwa.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,10 @@ export class AppComponent implements AfterViewInit, DoCheck {
   loggedIn = false;
   title = 'Shopper';
 
-  constructor(public router: Router, public _auth: AuthService) {
+  constructor(public router: Router, public auth: AuthService, public pwa: PwaService) {
+
     this.online = navigator.onLine;
+
   }
 
   ngAfterViewInit() {
@@ -69,8 +72,16 @@ export class AppComponent implements AfterViewInit, DoCheck {
   }
 
   logOut() {
-    this._auth.logOut();
+    this.auth.logOut();
     this.router.navigate(['/login']);
+  }
+
+  showInstallPrompt() {
+
+    // @ts-ignore
+    // this.pwa.prompt.prompt();
+    this.pwa.showInstallPrompt();
+
   }
 
 }

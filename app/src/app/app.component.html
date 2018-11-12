@@ -16,6 +16,7 @@
   <div #sidebar class="mdl-layout__drawer">
     <span class="mdl-layout-title">Shopper</span>
     <nav class="mdl-navigation">
+      <a *ngIf="pwa.prompt" class="mdl-navigation__link" (click)="showInstallPrompt()">Install app</a>
       <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/">Shoppig list</a>
       <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/add">Add item</a>
       <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/scanner">Scan item</a>

@@ -18,9 +18,11 @@ import { InfoBarComponent } from './info-bar/info-bar.component';
 
 // Services
 import { AuthService } from './_services/auth.service';
+import { BcdsService } from './_services/bcds.service';
 import { ShoppingListService } from './_services/shopping-list.service';
 import { ProfileService } from './_services/profile.service';
 import { InfoBarService } from './_services/info-bar.service';
+import { PwaService } from './_services/pwa.service';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { UnauthInterceptorService } from './_services/unauth-interceptor.service';
 
@@ -57,6 +59,8 @@ import { environment } from '../environments/environment';
   ],
   providers: [
     AuthService,
+    BcdsService,
+    PwaService,
     ShoppingListService,
     ProfileService,
     InfoBarService,
