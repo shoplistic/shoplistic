@@ -8,3 +8,4 @@
 * Unit tests for the Angular App
 * Dark Theme?
 * Add items to the bcds.
+* GitHub Web Hooks for automatic updates
