@@ -25,6 +25,7 @@ export class PwaService {
     // Hide the 'Install App' button
     window.addEventListener('appinstalled', () => {
       this.prompt = null;
+      this._infobarService.show('Shopper is now installed', 3000);
     });
 
   }
