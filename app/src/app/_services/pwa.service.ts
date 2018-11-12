@@ -39,7 +39,7 @@ export class PwaService {
         this.prompt = null;
       } else {
         console.log('rejected');
-        this._infobarService.show('Failed to install appqw', 3000);
+        this._infobarService.show('Failed to install app', 3000);
       }
     });
   }
