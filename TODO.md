@@ -9,3 +9,4 @@
 * Dark Theme?
 * Add items to the bcds.
 * GitHub Web Hooks for automatic updates
+* Clean up @ts-ingore
