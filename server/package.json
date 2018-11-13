@@ -9,7 +9,7 @@
     "ts:compile": "tsc -p ./src/tsconfig.server.json",
     "ts:watch": "tsc -p ./src/tsconfig.server.json --watch",
     "dev": "npm rebuild --build-from-source && node devserver",
-    "test": "npm run test:compile && mocha out-test",
+    "test": "mocha out-test",
     "test:compile": "tsc -p ./test/tsconfig.test.json",
     "clean": "rm -rf out"
   },

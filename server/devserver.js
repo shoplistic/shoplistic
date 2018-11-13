@@ -14,7 +14,7 @@ const fsext = [
 ];
 
 concurrently([{
-    command: 'node_modules/.bin/tsc -p ./ --watch',
+    command: 'npm:ts:watch',
     name: 'Typescript',
     prefixColor: ['white', 'bgBlue', 'bold']
   },
