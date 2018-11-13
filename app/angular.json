@@ -47,9 +47,12 @@
               "src/manifest.json"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/mdl/material.blue-red.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/mdl/material.min.js"
+            ]
           },
           "configurations": {
             "production": {
