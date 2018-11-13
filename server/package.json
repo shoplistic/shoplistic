@@ -6,15 +6,21 @@
   "scripts": {
     "prestart": "npm install && npm run ts:compile",
     "start": "node out/index",
+    "ts:compile": "tsc -p ./src/tsconfig.server.json",
+    "ts:watch": "tsc -p ./src/tsconfig.server.json --watch",
     "dev": "npm rebuild --build-from-source && node devserver",
-    "ts:compile": "tsc -p ./",
-    "ts:watch": "tsc -p ./ --watch",
+    "test": "npm run test:compile && mocha out-test",
+    "test:compile": "tsc -p ./test/tsconfig.test.json",
     "clean": "rm -rf out"
   },
   "author": "olback",
   "private": true,
   "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node-fetch": "^2.1.2",
     "concurrently": "^4.0.1",
+    "mocha": "^5.2.0",
+    "node-fetch": "^2.3.0",
     "nodemon": "^1.18.4"
   },
   "dependencies": {
