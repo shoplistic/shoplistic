@@ -2,7 +2,7 @@ import { Router, json as bodyParser } from 'express';
 import { Client } from 'pg';
 import { pgConf } from '../config';
 import { bearerGuard } from '../guards/bearer';
-import { bcdsWrite } from '../guards/bcds';
+import { adminGuard } from '../guards/admin';
 
 const router = Router();
 
@@ -39,7 +39,7 @@ router.get('/:barcode', bearerGuard, (req, res) => {
 
 });
 
-router.post('/', bearerGuard, bcdsWrite, (req, res) => {
+router.post('/', bearerGuard, adminGuard, (req, res) => {
 
   const barcode: string = req.body.barcode ? String(req.body.barcode).trim() : '';
   const display_name: string = req.body.display_name ? String(req.body.display_name).trim() : '';
@@ -96,7 +96,7 @@ router.post('/', bearerGuard, bcdsWrite, (req, res) => {
 
 });
 
-router.patch('/', bearerGuard, bcdsWrite, (req, res) => {
+router.patch('/', bearerGuard, adminGuard, (req, res) => {
 
   const barcode: string = req.body.barcode ? String(req.body.barcode).trim() : '';
   const display_name: string = req.body.display_name ? String(req.body.display_name).trim() : '';
@@ -140,7 +140,7 @@ router.patch('/', bearerGuard, bcdsWrite, (req, res) => {
 
 });
 
-router.delete('/', bearerGuard, bcdsWrite, (req, res) => {
+router.delete('/', bearerGuard, adminGuard, (req, res) => {
 
   const barcode: string = req.body.barcode ? String(req.body.barcode).trim() : '';
 

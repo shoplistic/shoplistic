@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
+import { env } from 'process';
 import * as User from '../models/User';
 
-export function bcdsWrite(req: Request, res: Response, next: NextFunction) {
+export function adminGuard(req: Request, res: Response, next: NextFunction) {
 
   // @ts-ignore
   User.findById(req.userId, (err, user) => {
@@ -14,7 +15,13 @@ export function bcdsWrite(req: Request, res: Response, next: NextFunction) {
 
     } else if (user) {
 
-      if (user.permissions.bcdsWrite) {
+      const isAdmin = (env.ADMIN_USERS || '')
+      .split(',')
+      .filter(e => e.trim())
+      .map(e => e.trim())
+      .indexOf(user.username) + 1;
+
+      if (isAdmin) {
 
         return next();
 
@@ -25,7 +32,6 @@ export function bcdsWrite(req: Request, res: Response, next: NextFunction) {
         });
 
       }
-
 
     } else {
 
