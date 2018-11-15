@@ -45,7 +45,7 @@ ng build --prod
 cd ..
 
 # Create .env
-cp .env.sample .env
+cp -n .env.sample .env
 
 # Generate random passwords and tokens
 for i in `seq 1 3`; do
