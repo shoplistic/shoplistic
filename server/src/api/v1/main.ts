@@ -11,6 +11,7 @@ import * as user from './endpoints/user';
 import * as auth from './endpoints/auth';
 import * as profile from './endpoints/profile';
 import * as shoppinglist from './endpoints/shoppinglist';
+import * as admin from './endpoints/admin';
 
 // Connect to Mongodb
 mongoose
@@ -33,6 +34,7 @@ router.use('/user', user);
 router.use('/auth', auth);
 router.use('/profile', profile);
 router.use('/shoppinglist', shoppinglist);
+router.use('/admin', admin);
 
 router.get('/', (_req, res) => {
   res.redirect('/v1/docs');
