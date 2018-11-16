@@ -397,6 +397,27 @@ paths:
           required: true
           schema:
             type: string
+  /admin/stats:
+    get:
+      summary: Info about the system.
+      tags:
+        - Admin
+      responses:
+        '200':
+          description: Info object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bcds_entries:
+                    type: number
+                    example: 543353
+                  registerd_users:
+                    type: number
+                    example: 253
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 components:
   responses:
     Ok: # 200
