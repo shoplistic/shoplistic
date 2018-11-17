@@ -11,3 +11,4 @@
 * [ ] GitHub Web Hooks for automatic updates
 * [ ] Clean up @ts-ingore
 * [ ] Admin API
+* [ ] Loading icon thing?
