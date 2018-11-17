@@ -13,4 +13,4 @@
 * [ ] Clean up @ts-ingore's
 * [ ] Admin API
 * [ ] Loading icon thing?
-* [ ] Update info page
+* [x] Update info page

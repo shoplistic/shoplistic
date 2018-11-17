@@ -17,13 +17,14 @@ export class AboutComponent implements OnInit {
   constructor(private _http: HttpClient) { }
 
   version: string | null = null;
+  year = new Date().getFullYear();
 
   ngOnInit() {
     this._http.get<IVersionResponse>(urlResolve(environment.apiUrl, '/version')).subscribe(
       res => {
         this.version = res.version;
       },
-      err => {
+      _err => {
         this.version = 'Error fetching version';
       }
     );

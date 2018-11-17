@@ -4,13 +4,21 @@ div.about {
 
   h2 {
     font-size: 2em;
+    text-align: center;
   }
 
   margin: auto;
   max-width: 600px;
   margin-top: 20px;
 
+  img {
+    display: block;
+    margin: auto;
+    max-width: 100px;
+  }
+
   p {
+    text-align: center;
 
     a {
       color: #333;
