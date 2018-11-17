@@ -18,7 +18,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
   loggedIn = false;
   title = 'Shopper';
 
-  constructor(public router: Router, public auth: AuthService, public pwa: PwaService) {
+  constructor(private _auth: AuthService, public router: Router, public pwa: PwaService) {
 
     this.online = navigator.onLine;
 
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   ngDoCheck() {
     this.online = navigator.onLine;
-    this.loggedIn = this.router.url !== '/login' && this.router.url !== '/register';
+    this.loggedIn = !!localStorage.getItem('token');
 
     switch (this.router.url) {
 
@@ -72,7 +72,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
   }
 
   logOut() {
-    this.auth.logOut();
+    this._auth.logOut();
     this.router.navigate(['/login']);
   }
 
