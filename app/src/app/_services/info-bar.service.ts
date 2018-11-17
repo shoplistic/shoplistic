@@ -20,7 +20,9 @@ export class InfoBarService {
   }
 
   hide() {
+
     this.visible = false;
+
   }
 
 }

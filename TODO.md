@@ -14,4 +14,4 @@
 * [ ] Admin API
 * [ ] Loading icon thing?
 * [x] Update info page
-* [ ] Fix infobar bug
+* [x] Fix infobar bug

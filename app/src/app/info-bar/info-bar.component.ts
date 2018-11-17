@@ -10,6 +10,8 @@ export class InfoBarComponent implements DoCheck {
 
   @ViewChild('ib') ib: ElementRef;
 
+  timeout: number;
+
   constructor(private _infobarService: InfoBarService) { }
 
   ngDoCheck() {
@@ -28,7 +30,8 @@ export class InfoBarComponent implements DoCheck {
     this.ib.nativeElement.classList.add('show');
 
     if (ms) {
-      setTimeout(() => {
+      clearTimeout(this.timeout);
+      this.timeout = window.setTimeout(() => {
         this.hide();
       }, ms);
     }
