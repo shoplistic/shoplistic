@@ -27,7 +27,8 @@ export class AddItemComponent implements AfterViewInit {
         this.item = new ShoppingListItem('', '', '', 1);
       },
       err => {
-        console.error(err);
+        // console.error(err);
+        this._infobarService.show(`Error adding ${this.item.display_name}`, 3000);
       }
     );
   }

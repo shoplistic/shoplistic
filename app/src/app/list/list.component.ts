@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IShoppingListItem } from '../_classes/shopping-list-item';
 import { ShoppingListService } from '../_services/shopping-list.service';
+import { InfoBarService } from '../_services/info-bar.service';
 
 @Component({
   selector: 'app-list',
@@ -10,8 +11,9 @@ import { ShoppingListService } from '../_services/shopping-list.service';
 export class ListComponent implements OnInit {
 
   shoppingList: IShoppingListItem[] = [];
+  error = false;
 
-  constructor(private _shoppinglistService: ShoppingListService) { }
+  constructor(private _shoppinglistService: ShoppingListService, private _infobarService: InfoBarService) { }
 
   ngOnInit() {
     this.fetchItems();
@@ -21,9 +23,11 @@ export class ListComponent implements OnInit {
     this._shoppinglistService.getList().subscribe(
       res => {
         this.shoppingList = res;
+        this.error = false;
       },
-      err => {
-        console.error(err);
+      _err => {
+        // console.error(_err);
+        this.error = true;
       }
     );
   }
@@ -38,8 +42,9 @@ export class ListComponent implements OnInit {
           }
         }
       },
-      err => {
-        console.error(err);
+      _err => {
+        // console.error(err);
+        this._infobarService.show('Error removing item', 3000);
       }
     );
   }
