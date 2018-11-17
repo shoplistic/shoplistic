@@ -19,11 +19,14 @@ export class ListComponent implements OnInit {
     this.fetchItems();
   }
 
-  fetchItems() {
+  fetchItems(showInfoBar = false) {
     this._shoppinglistService.getList().subscribe(
       res => {
         this.shoppingList = res;
         this.error = false;
+        if (showInfoBar) {
+          this._infobarService.show('Shopping list refreshed', 3000);
+        }
       },
       _err => {
         // console.error(_err);
