@@ -15,11 +15,11 @@ export function adminGuard(req: Request, res: Response, next: NextFunction) {
 
     } else if (user) {
 
-      const isAdmin = (env.ADMIN_USERS || '')
+      const isAdmin = Boolean((env.ADMIN_USERS || '')
       .split(',')
       .filter(e => e.trim())
       .map(e => e.trim())
-      .indexOf(user.username) + 1;
+      .indexOf(user.username) + 1);
 
       if (isAdmin) {
 

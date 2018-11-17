@@ -25,9 +25,13 @@ paths:
                 password:
                   type: string
                   example: ThisIsMySuperSecurePassword123
+                admin:
+                  type: boolean
+                  example: false
               required:
                 - username
                 - password
+                - admin
       responses:
         '200':
           description: User authenticated. A JSON object containging a username and a bearer token.

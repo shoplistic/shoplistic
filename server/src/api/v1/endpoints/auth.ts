@@ -1,4 +1,5 @@
 import { Router, json as bodyParser } from 'express';
+import { env } from 'process';
 import * as User from '../models/User';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
@@ -42,7 +43,8 @@ router.post('/', (req, res) => {
 
             res.status(200).json({
               username: user.username,
-              bearer: token
+              bearer: token,
+              admin: Boolean((env.ADMIN_USERS || '').split(',').filter(e => e.trim()).map(e => e.trim()).indexOf(user.username) + 1)
             });
 
           } else {

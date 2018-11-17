@@ -9,4 +9,5 @@ export class UserLogin {
 export interface UserLoginResponse {
   username: string;
   bearer: string;
+  admin: boolean;
 }
