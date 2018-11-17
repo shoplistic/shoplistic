@@ -9,9 +9,9 @@
 * [ ] Dark Theme?
 * [ ] Add items to the bcds interface.
 * [ ] ~~GitHub Web Hooks for automatic updates~~
-* [ ] Automatic CI deply
+* [ ] CI/CD
 * [ ] Clean up @ts-ingore's
-* [ ] Admin API
+* [ ] Admin API?
 * [ ] Loading icon thing?
 * [x] Update info page
 * [x] Fix infobar bug
