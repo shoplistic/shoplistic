@@ -416,6 +416,9 @@ paths:
                   registerd_users:
                     type: number
                     example: 253
+                  uptime:
+                    type: number
+                    example: 534534
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:

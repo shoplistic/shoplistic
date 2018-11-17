@@ -29,7 +29,7 @@ router.get('/stats', bearerGuard, adminGuard, async (_req, res) => {
   db.connect();
   const bcds_entries_query = await db.query('SELECT COUNT(*) FROM products');
   db.end();
-  stats.bcds_entries = bcds_entries_query.rows[0].count;
+  stats.bcds_entries = Number(bcds_entries_query.rows[0].count);
 
   // Get the amount of registed users
   const registerd_users = await User.countDocuments({});
