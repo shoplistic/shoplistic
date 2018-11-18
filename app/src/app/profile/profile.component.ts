@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
         this.userData = res;
         this.regDate = new Date(res.registerDate).toLocaleString();
       },
-      err => {
+      _err => {
         // console.error(err);
         this._infobarService.show('Error fetching data', 3000);
       }

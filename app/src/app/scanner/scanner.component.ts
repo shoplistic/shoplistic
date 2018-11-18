@@ -173,10 +173,10 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
       manufacturer: item.manufacturer,
       amount: 1
     }).subscribe(
-      res => {
+      _res => {
         this._infobarService.show(`${item.display_name} added to the shopping list`, 3000);
       },
-      err => {
+      _err => {
         this._infobarService.show(`And error occurred`, 3000);
       }
     );
