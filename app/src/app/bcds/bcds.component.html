@@ -1,0 +1,56 @@
+<!-- <div [hidden]="!barcodeValue" class="barcode">
+  {{ barcode }}
+</div> -->
+
+<div id="scanner"></div>
+
+<div *ngIf="err" class="error">
+  <div class="error-msg">
+    {{ err }}
+  </div>
+</div>
+
+<div #addModal class="addModal show">
+  <div class="shadow"></div>
+  <div class="content">
+    <!-- <p>Add {{ item.display_name }} to your shopping list?</p>
+    <div class="ilb">
+      <button class="mdl-button mdl-js-button mdl-button--accent" (click)="toggleAddModal()">
+        No
+      </button>
+      <button class="mdl-button mdl-js-button mdl-button--primary" (click)="submit(item)">
+        Yes
+      </button>
+    </div> -->
+    <form>
+      <ul class="mdl-list">
+        <li class="mdl-list__item">
+          <div class="input-group">
+            <label for="barcode">Barcode</label>
+            <input type="text" id="barcode" />
+          </div>
+        </li>
+        <li class="mdl-list__item">
+          <div class="input-group">
+            <label for="display_name">Display name</label>
+            <input type="text" id="display_name" />
+          </div>
+        </li>
+        <li class="mdl-list__item">
+          <div class="input-group">
+            <label for="manufacturer">Manufacturer</label>
+            <input type="text" id="manufacturer" />
+          </div>
+        </li>
+        <li class="mdl-list__item">
+          <button class="mdl-button mdl-button--accent" (click)="toggleModal()">
+            Cancel
+          </button>
+          <button class="mdl-button mdl-button--raised mdl-button--colored">
+            Add item
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

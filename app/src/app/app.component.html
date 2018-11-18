@@ -22,6 +22,7 @@
       <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/scanner">Scan item</a>
       <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/profile">Profile</a>
       <a *ngIf="loggedIn" class="mdl-navigation__link" routerLink="/settings">Settings</a>
+      <a *ngIf="isAdmin" class="mdl-navigation__link" routerLink="/bcds">Bcds</a>
       <a *ngIf="!loggedIn && router.url !== '/login'" class="mdl-navigation__link" routerLink="/login">Login</a>
       <a *ngIf="!loggedIn && router.url !== '/register'" class="mdl-navigation__link" routerLink="/register">Register</a>
       <a class="mdl-navigation__link" href="javascript:location.reload(true)">Reload app</a>
