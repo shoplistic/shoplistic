@@ -13,5 +13,5 @@
 
 1. Get the code: `git clone https://github.com/shopper-ink/shopper`.
 2. Change directory to the code: `cd shopper`.
-3. Run the setup script: `./setup.sh`
+3. Run the setup script: `./scripts/setup.sh`
 4. Configure nginx. (comming later)

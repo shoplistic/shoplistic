@@ -36,4 +36,5 @@ npm install
 ng build --prod
 cd ..
 
-docker-compose restart
+docker-compose down
+docker-compose up -d

@@ -40,7 +40,8 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
     volumes:
       - ${DATA_STORE}/postgres:/var/lib/postgresql/data
-      - ${SHOPPER_DIR}/setup/postgres:/setup/
+      - ${SHOPPER_DIR}/scripts/postgres:/scripts/
+      - ${DUMP_DIR}/postgres:/export/
 
   mongo:
     image: mongo
@@ -53,4 +54,5 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - ${DATA_STORE}/mongo:/data/db
-      - ${SHOPPER_DIR}/setup/mongo:/setup/
+      - ${SHOPPER_DIR}/scripts/mongo:/scripts/
+      - ${DUMP_DIR}/mongo:/export/

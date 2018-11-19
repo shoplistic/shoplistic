@@ -63,11 +63,12 @@ sleep 30
 DIR=$(basename $PWD)
 
 # Execute setup scripts
-docker exec $(docker ps | grep ${DIR}_mongo | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/setup/install.sh"
-docker exec $(docker ps | grep ${DIR}_postgres | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/setup/install.sh"
+docker exec $(docker ps | grep ${DIR}_mongo | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/scripts/install.sh"
+docker exec $(docker ps | grep ${DIR}_postgres | rev | cut -d ' ' -f 1 | rev) "/bin/bash" "/scripts/install.sh"
 
 # Restart the containers
-docker-compose restart
+docker-compose down
+docker-compose up -d
 
 PORT=$(cat .env | grep NODE_PORT | cut -b 11-15)
 echo "Done. API running on port $PORT"
