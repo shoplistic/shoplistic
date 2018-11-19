@@ -12,6 +12,7 @@ import { InfoBarService } from '../_services/info-bar.service';
 export class BcdsComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('addModal') addModal: ElementRef;
+  @ViewChild('af') af: ElementRef;
 
   barcodeSamples: string[] = [];
   barcode = '';
@@ -101,6 +102,7 @@ export class BcdsComponent implements AfterViewInit, OnDestroy {
                 this.isNew = true;
                 this.item = new Bcds(this.barcode, '', '');
                 this.toggleModal();
+                this.af.nativeElement.focus();
               } else {
                 this._infobarService.show('An error occurred', 3000);
               }

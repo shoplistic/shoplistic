@@ -13,21 +13,12 @@
 <div #addModal class="addModal">
   <div class="shadow"></div>
   <div class="content">
-    <!-- <p>Add {{ item.display_name }} to your shopping list?</p>
-    <div class="ilb">
-      <button class="mdl-button mdl-js-button mdl-button--accent" (click)="toggleAddModal()">
-        No
-      </button>
-      <button class="mdl-button mdl-js-button mdl-button--primary" (click)="submit(item)">
-        Yes
-      </button>
-    </div> -->
     <form #bcdsForm="ngForm">
       <ul class="mdl-list">
         <li class="mdl-list__item">
           <div class="input-group">
             <label for="barcode">Barcode</label>
-            <input type="text" id="barcode" name="barcode" required [(ngModel)]="item.barcode" #barcode="ngModel" />
+            <input type="text" id="barcode" name="barcode" required readonly [(ngModel)]="item.barcode" #barcode="ngModel" />
           </div>
         </li>
         <li class="mdl-list__item">
