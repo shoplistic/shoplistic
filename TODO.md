@@ -7,7 +7,7 @@
 * [ ] Unit tests for the API
 * [ ] Unit tests for the Angular App
 * [ ] Dark Theme?
-* [ ] Add items to the bcds interface.
+* [x] Add items to the bcds interface.
 * [ ] ~~GitHub Web Hooks for automatic updates~~
 * [ ] CI/CD
 * [ ] Clean up @ts-ingore's
