@@ -16,6 +16,7 @@ export class BcdsComponent implements AfterViewInit, OnDestroy {
   barcodeSamples: string[] = [];
   barcode = '';
   item = new Bcds('', '', '');
+  isNew = false;
   active = true;
   requiredScans = 25;
   err: string;
@@ -89,13 +90,19 @@ export class BcdsComponent implements AfterViewInit, OnDestroy {
           this._bcdsService.get(this.barcode).subscribe(
             res => {
               console.log('found an item');
+              this.isNew = false;
               this.item = res;
               this.toggleModal();
             },
             err => {
               this.active = true;
               if (err.status === 404) {
-                this._infobarService.show(`Barcode ${this.barcode} not found`, 3000);
+                // Item does not exist, add it?
+                this.isNew = true;
+                this.item = new Bcds(this.barcode, '', '');
+                this.toggleModal();
+              } else {
+                this._infobarService.show('An error occurred', 3000);
               }
             }
           );
@@ -160,19 +167,52 @@ export class BcdsComponent implements AfterViewInit, OnDestroy {
 
   }
 
-  submitAdd(item: Bcds) {
+  onSubmit(item: Bcds) {
 
     console.log(item);
     console.log('submitted');
-    this.toggleModal();
+
+    if (this.isNew) {
+
+      this._bcdsService.add(item).subscribe(
+        _res => {
+          this.toggleModal();
+          this._infobarService.show(`${item.display_name} added to the bcds`, 3000);
+        },
+        _err => {
+          this._infobarService.show(`Error adding ${item.display_name} to the bcds`, 3000);
+        }
+      );
+
+    } else {
+
+      this._bcdsService.edit(item).subscribe(
+        _res => {
+          this.toggleModal();
+          this._infobarService.show(`${item.display_name} saved`, 3000);
+        },
+        _err => {
+          this._infobarService.show(`Error saving ${item.display_name}`, 3000);
+        }
+      );
+
+    }
 
   }
 
-  // submitEdit(item: Bcds) {
-  // }
+  submiteDelete(item: Bcds) {
 
-  // submiteDelete(barcode: string) {
-  // }
+    this._bcdsService.delete(item.barcode).subscribe(
+      _res => {
+        this.toggleModal();
+        this._infobarService.show(`${item.display_name} deleted`, 3000);
+      },
+      _err => {
+        this._infobarService.show(`Error removing ${item.display_name}`, 3000);
+      }
+    );
+
+  }
 
 }
 
