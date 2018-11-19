@@ -16,6 +16,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   online = false;
   loggedIn = false;
+  isAdmin = false;
   title = 'Shopper';
 
   constructor(private _auth: AuthService, public router: Router, public pwa: PwaService) {
@@ -36,6 +37,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
   ngDoCheck() {
     this.online = navigator.onLine;
     this.loggedIn = !!localStorage.getItem('token');
+    this.isAdmin = !!localStorage.getItem('admin');
 
     switch (this.router.url) {
 
@@ -57,6 +59,10 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
       case '/settings':
         this.title = 'Settings';
+        break;
+
+      case '/bcds':
+        this.title = 'Bcds';
         break;
 
       case '/about':

@@ -37,6 +37,9 @@ export class LoginComponent implements AfterViewInit {
         res => {
           localStorage.setItem('token', res.bearer);
           this._router.navigate(['/']);
+          if (res.admin) {
+            localStorage.setItem('admin', 'true');
+          }
         },
         err => {
           this.submitted = false;

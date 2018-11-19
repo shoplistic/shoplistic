@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { Error404Component } from './error404/error404.component';
 import { InfoBarComponent } from './info-bar/info-bar.component';
+import { AboutComponent } from './about/about.component';
+import { BcdsComponent } from './bcds/bcds.component';
 
 // Services
 import { AuthService } from './_services/auth.service';
@@ -28,7 +30,7 @@ import { UnauthInterceptorService } from './_services/unauth-interceptor.service
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
-import { AboutComponent } from './about/about.component';
+import { AdminGuard } from './_guards/admin.guard';
 
 // Service worker
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -48,7 +50,8 @@ import { environment } from '../environments/environment';
     LoginComponent,
     RegisterComponent,
     InfoBarComponent,
-    AboutComponent
+    AboutComponent,
+    BcdsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { environment } from '../environments/environment';
     ProfileService,
     InfoBarService,
     AuthGuard,
+    AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

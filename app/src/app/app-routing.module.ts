@@ -11,9 +11,11 @@ import { Error404Component } from './error404/error404.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
+import { BcdsComponent } from './bcds/bcds.component';
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
+import { AdminGuard } from './_guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -40,6 +42,11 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'bcds',
+    component: BcdsComponent,
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'login',
