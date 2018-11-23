@@ -25,6 +25,7 @@ import { ShoppingListService } from './_services/shopping-list.service';
 import { ProfileService } from './_services/profile.service';
 import { InfoBarService } from './_services/info-bar.service';
 import { PwaService } from './_services/pwa.service';
+import { ThemeService } from './_services/theme.service';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { UnauthInterceptorService } from './_services/unauth-interceptor.service';
 
@@ -64,6 +65,7 @@ import { environment } from '../environments/environment';
     AuthService,
     BcdsService,
     PwaService,
+    ThemeService,
     ShoppingListService,
     ProfileService,
     InfoBarService,

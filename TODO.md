@@ -6,7 +6,7 @@
 * [x] Show infobar on refresh
 * [ ] Unit tests for the API
 * [ ] Unit tests for the Angular App
-* [ ] Dark Theme?
+* [ ] Dark Theme? (theme.service.ts)
 * [x] Add items to the bcds interface.
 * [ ] ~~GitHub Web Hooks for automatic updates~~
 * [ ] CI/CD
