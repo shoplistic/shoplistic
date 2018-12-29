@@ -3,7 +3,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import * as yaml from 'yamljs';
 import * as path from 'path';
 
-const swaggerDoc = yaml.load(path.join(process.cwd(), 'shopper.openapi.yml'));
+const swaggerDoc = yaml.load(path.join(process.cwd(), 'shoplistic.openapi.yml'));
 const router = Router();
 
 const DisableTryItOut = () => {

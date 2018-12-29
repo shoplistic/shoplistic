@@ -2,7 +2,7 @@ const concurrently = require('concurrently');
 const process = require('process');
 
 if (process.platform !== 'win32') {
-  process.stdout.write('\x1b]2; Shopper API Dev Server \x1b\x5c');
+  process.stdout.write('\x1b]2; Shoplistic API Dev Server \x1b\x5c');
 }
 
 // Files watch

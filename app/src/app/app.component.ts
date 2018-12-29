@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
   online = false;
   loggedIn = false;
   isAdmin = false;
-  title = 'Shopper';
+  title = 'Shoplistic';
 
   constructor(private _auth: AuthService, public router: Router, public pwa: PwaService) {
 
@@ -70,7 +70,7 @@ export class AppComponent implements AfterViewInit, DoCheck {
         break;
 
       default:
-        this.title = 'Shopper';
+        this.title = 'Shoplistic';
         break;
 
     }

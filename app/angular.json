@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "shopper": {
+    "shoplistic": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -78,21 +78,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "shopper:build",
+            "browserTarget": "shoplistic:build",
             "port": 4200,
             "liveReload": true,
             "host": "0.0.0.0"
           },
           "configurations": {
             "production": {
-              "browserTarget": "shopper:build:production"
+              "browserTarget": "shoplistic:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "shopper:build"
+            "browserTarget": "shoplistic:build"
           }
         },
         "test": {
@@ -127,7 +127,7 @@
         }
       }
     },
-    "shopper-e2e": {
+    "shoplistic-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -135,11 +135,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "shopper:serve"
+            "devServerTarget": "shoplistic:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "shopper:serve:production"
+              "devServerTarget": "shoplistic:serve:production"
             }
           }
         },
@@ -155,5 +155,5 @@
       }
     }
   },
-  "defaultProject": "shopper"
+  "defaultProject": "shoplistic"
 }

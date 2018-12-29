@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
-  title: Shopper API.
-  description: Complete documentation for the Shopper API.
+  title: Shoplistic API.
+  description: Complete documentation for the Shoplistic API.
   version: 1.0.0
 servers:
-  - url: http://api.shopper.ink/v1
+  - url: http://api.shoplistic.com/v1
 paths:
   /auth: # Login
     post:

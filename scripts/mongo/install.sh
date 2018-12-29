@@ -4,7 +4,7 @@ set -e
 mongo <<EOF
 use admin
 db.auth('$MONGO_INITDB_ROOT_USERNAME', '$MONGO_INITDB_ROOT_PASSWORD');
-use shopper
+use shoplistic
 db.createUser({
   user:  '$MONGO_INITDB_ROOT_USERNAME',
   pwd: '$MONGO_INITDB_ROOT_PASSWORD',

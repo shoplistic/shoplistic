@@ -33,9 +33,9 @@
     {
       "name": "API",
       "urls": [
-        "https://api.shopper.ink/v1/**",
-        "!https://api.shopper.ink/v1/bcds",
-        "!https://api.shopper.ink/v1/bcds/*"
+        "https://api.shoplistic.com/v1/**",
+        "!https://api.shoplistic.com/v1/bcds",
+        "!https://api.shoplistic.com/v1/bcds/*"
       ],
       "version": 1,
       "cacheConfig": {

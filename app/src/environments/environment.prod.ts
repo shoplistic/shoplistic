@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.shopper.ink/v1/'
+  apiUrl: 'https://api.shoplistic.com/v1/'
 };

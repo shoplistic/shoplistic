@@ -21,7 +21,7 @@ if (env.NODE_ENV === 'dev') {
   app.use(cors());
 } else {
   app.use(cors({
-    origin: 'https://app.shopper.ink'
+    origin: 'https://app.shoplistic.com'
   }));
 }
 

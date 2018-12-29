@@ -35,7 +35,7 @@ function requestInit(method: string, data: any = null, bearer?: string | null) {
 
 }
 
-describe('Shopper API', () => {
+describe('Shoplistic API', () => {
 
   const store = {
     bearer: null
@@ -99,5 +99,5 @@ describe('Shopper API', () => {
 
 });
 
-// describe('Shopper BCDS API', () => {
+// describe('Shoplistic BCDS API', () => {
 // });

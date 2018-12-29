@@ -12,7 +12,7 @@ services:
     links:
       - postgres
       - mongo
-    working_dir: /shopper/server
+    working_dir: /shoplistic/server
     environment:
       ADMIN_USERS: ${ADMIN_USERS}
       NODE_PORT: ${NODE_PORT}
@@ -28,7 +28,7 @@ services:
       MONGO_PORT: ${MONGO_PORT}
       MONGO_PASSWORD: ${MONGO_PASSWORD}
     volumes:
-      - ${SHOPPER_DIR}:/shopper/
+      - ${SHOPLISTIC_DIR}:/shoplistic/
 
   postgres:
     image: postgres
@@ -40,7 +40,7 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
     volumes:
       - ${DATA_STORE}/postgres:/var/lib/postgresql/data
-      - ${SHOPPER_DIR}/scripts/postgres:/scripts/
+      - ${SHOPLISTIC_DIR}/scripts/postgres:/scripts/
       - ${DUMP_DIR}/postgres:/export/
 
   mongo:
@@ -54,5 +54,5 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - ${DATA_STORE}/mongo:/data/db
-      - ${SHOPPER_DIR}/scripts/mongo:/scripts/
+      - ${SHOPLISTIC_DIR}/scripts/mongo:/scripts/
       - ${DUMP_DIR}/mongo:/export/
