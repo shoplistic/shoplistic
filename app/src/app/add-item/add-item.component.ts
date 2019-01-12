@@ -36,16 +36,16 @@ export class AddItemComponent implements AfterViewInit {
   }
 
   search() {
-    this._shoppinlistService.search(this.item.display_name).subscribe(
-      res => {
-        console.log(res);
-        this.datalist = res;
-      },
-      _err => {
-        // Nothing to do here.
-        this.datalist = [];
-      }
-    );
+    if ((this.item.display_name.length % 2 === 0 || this.item.display_name.length === 1) && this.item.display_name.length > 0) {
+      this._shoppinlistService.search(this.item.display_name.trim()).subscribe(
+        res => {
+          this.datalist = res;
+        },
+        _err => {
+          this.datalist = [];
+        }
+      );
+    }
   }
 
   fill() {
