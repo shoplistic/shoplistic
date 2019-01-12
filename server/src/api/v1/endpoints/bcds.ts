@@ -8,6 +8,38 @@ const router = Router();
 
 router.use(bodyParser());
 
+router.get('/search', bearerGuard, (req, res) => {
+
+  const query = req.query['q'] || '';
+
+  const db = new Client(pgConf);
+  db.connect();
+  db.query('SELECT * FROM products WHERE display_name ILIKE \'%\' || $1 || \'%\' LIMIT 10', [query], (error, result) => {
+
+    if (error) {
+
+      res.status(500).json({
+        message: 'Internal Server Error'
+      });
+
+    } else if (result.rows.length > 0) {
+
+      res.status(200).json(result.rows);
+
+    } else {
+
+      res.status(404).json({
+        message: 'Not Found'
+      });
+
+    }
+
+    db.end();
+
+  });
+
+});
+
 router.get('/:barcode', bearerGuard, (req, res) => {
   // req.params.barcode
   // Test barcode: 0000

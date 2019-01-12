@@ -364,6 +364,44 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+  /bcds/search:
+    get:
+      summary: Search by display_name
+      tags:
+        - Barcode Data Store
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of article objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    barcode:
+                      type: string
+                      example: 7310070001764
+                    display_name:
+                      type: string
+                      example: Ramlösa Smultron 50cl
+                    manufacturer:
+                      type: string
+                      example: Carlsberg Sweden
+                  required:
+                    - barcode
+                    - display_name
+                    - manufacturer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
   /bcds/{barcode}:
     get:
       summary: Get info about a specific article
