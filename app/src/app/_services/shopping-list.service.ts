@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { resolve as urlResolve } from 'url';
 import { ShoppingListItem, IShoppingListItem } from '../_classes/shopping-list-item';
+import { Bcds } from '../_classes/bcds';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,16 @@ export class ShoppingListService {
     });
 
     // return this._http.delete(urlResolve(environment.apiUrl, 'shoppinglist'), item);
+
+  }
+
+  search(q: string) {
+
+    const u = new URL(urlResolve(environment.apiUrl, 'bcds/search'));
+    u.searchParams.append('q', q);
+    console.log(u.href);
+
+    return this._http.get<Bcds[]>(u.href);
 
   }
 
