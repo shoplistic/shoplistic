@@ -44,7 +44,7 @@ router.post('/', bearerGuard, (req, res) => {
   const manufacturer = req.body.manufacturer ? String(req.body.manufacturer).trim() : '';
   const amount = req.body.amount ? Number(req.body.amount) : 0;
 
-  if (display_name.length > 3 && amount > 0) {
+  if (display_name.length > 0 && amount > 0) {
 
       // @ts-ignore
       User.findById(req.userId, (err, user) => {
@@ -62,7 +62,7 @@ router.post('/', bearerGuard, (req, res) => {
           for (let item of user.shoppingList) {
 
             if (item.barcode === barcode && !!barcode) {
-              item.amount++;
+              item.amount += amount;
               changed = true;
               break;
             }
