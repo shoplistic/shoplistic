@@ -17,6 +17,7 @@ import { Error404Component } from './error404/error404.component';
 import { InfoBarComponent } from './info-bar/info-bar.component';
 import { AboutComponent } from './about/about.component';
 import { BcdsComponent } from './bcds/bcds.component';
+import { StatsComponent } from './stats/stats.component';
 
 // Services
 import { AuthService } from './_services/auth.service';
@@ -28,6 +29,7 @@ import { PwaService } from './_services/pwa.service';
 import { ThemeService } from './_services/theme.service';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { UnauthInterceptorService } from './_services/unauth-interceptor.service';
+import { StatsService } from './_services/stats.service';
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
@@ -52,7 +54,8 @@ import { environment } from '../environments/environment';
     RegisterComponent,
     InfoBarComponent,
     AboutComponent,
-    BcdsComponent
+    BcdsComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { environment } from '../environments/environment';
     ShoppingListService,
     ProfileService,
     InfoBarService,
+    StatsService,
     AuthGuard,
     AdminGuard,
     {

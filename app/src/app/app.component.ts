@@ -62,7 +62,11 @@ export class AppComponent implements AfterViewInit, DoCheck {
         break;
 
       case '/bcds':
-        this.title = 'Bcds';
+        this.title = 'Add to database';
+        break;
+
+      case '/stats':
+        this.title = 'Statistics / Info';
         break;
 
       case '/about':

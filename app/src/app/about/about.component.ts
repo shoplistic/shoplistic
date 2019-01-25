@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { resolve as urlResolve } from 'url';
-
-interface IVersionResponse {
-  version: string;
-}
+import { StatsService } from '../_services/stats.service';
 
 @Component({
   selector: 'app-about',
@@ -14,13 +8,13 @@ interface IVersionResponse {
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _stats: StatsService) { }
 
   version: string | null = null;
   year = new Date().getFullYear();
 
   ngOnInit() {
-    this._http.get<IVersionResponse>(urlResolve(environment.apiUrl, '/version')).subscribe(
+    this._stats.version().subscribe(
       res => {
         this.version = res.version;
       },

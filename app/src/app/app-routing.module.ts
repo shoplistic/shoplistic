@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { BcdsComponent } from './bcds/bcds.component';
+import { StatsComponent } from './stats/stats.component';
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'bcds',
     component: BcdsComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {
+    path: 'stats',
+    component: StatsComponent,
     canActivate: [AuthGuard, AdminGuard]
   },
   {
