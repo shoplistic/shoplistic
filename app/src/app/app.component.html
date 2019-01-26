@@ -26,7 +26,7 @@
       <a *ngIf="isAdmin" class="mdl-navigation__link" routerLink="/stats">Statistics / Info</a>
       <a *ngIf="!loggedIn && router.url !== '/login'" class="mdl-navigation__link" routerLink="/login">Login</a>
       <a *ngIf="!loggedIn && router.url !== '/register'" class="mdl-navigation__link" routerLink="/register">Register</a>
-      <a class="mdl-navigation__link" href="javascript:location.reload(true)">Reload app</a>
+      <a class="mdl-navigation__link" (click)="reloadApp()">Reload app</a>
       <a *ngIf="loggedIn" (click)="logOut()" class="mdl-navigation__link">Log out</a>
       <a class="mdl-navigation__link" routerLink="/about">About shoplistic</a>
     </nav>

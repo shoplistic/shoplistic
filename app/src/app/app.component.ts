@@ -81,6 +81,10 @@ export class AppComponent implements AfterViewInit, DoCheck {
 
   }
 
+  reloadApp() {
+    location.reload(true);
+  }
+
   logOut() {
     this._auth.logOut();
     this.router.navigate(['/login']);
