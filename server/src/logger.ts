@@ -1,37 +1,55 @@
 'use strict';
 
 import * as morgan from 'morgan';
-import * as c from 'colors';
+import * as co from 'colors';
+import { HttpStatusCodes } from './http_status_codes';
 
 // [REQUEST] 172.21.0.1 [Tue, 23 Oct 2018 16:58:12 GMT] GET /path/gfdg 401 Authorization: Bearer eyJhb...wBJEo
+
+function statusCode(c: number) {
+
+  if (c >= 500) {
+    return {
+      status: String(HttpStatusCodes.getFirstStatus(c)).red.bold,
+      code: String(c).red.bold
+    }
+  } else if (c >= 400) {
+    return {
+      status: String(HttpStatusCodes.getFirstStatus(c)).yellow.bold,
+      code: String(c).yellow.bold
+    }
+  } else if (c >= 300) {
+    return {
+      status: String(HttpStatusCodes.getFirstStatus(c)).cyan.bold,
+      code: String(c).cyan.bold
+    }
+  } else if (c >= 200) {
+    return {
+      status: String(HttpStatusCodes.getFirstStatus(c)).green.bold,
+      code: String(c).green.bold
+    }
+  } else {
+    return {
+      status: String(HttpStatusCodes.getFirstStatus(c)).normalize,
+      code: String(c).normalize
+    }
+  }
+
+}
 
 const requests = morgan((tokens, req, res) => {
 
   const method = req.method
-    .replace('GET', c.bold(c.blue('GET')))
-    .replace('POST', c.bold(c.green('POST')))
-    .replace('PATCH', c.bold(c.cyan('PATCH')))
-    .replace('PUT', c.bold(c.yellow('PUT')))
-    .replace('DELETE', c.bold(c.red('DELETE')))
-    .replace('OPTIONS', c.bold(c.black('OPTIONS')));
+    .replace('GET', co.bold(co.blue('GET')))
+    .replace('POST', co.bold(co.green('POST')))
+    .replace('PATCH', co.bold(co.cyan('PATCH')))
+    .replace('PUT', co.bold(co.yellow('PUT')))
+    .replace('DELETE', co.bold(co.red('DELETE')))
+    .replace('OPTIONS', co.bold(co.black('OPTIONS')));
 
-  const status = (() => {
+  const c = Number(tokens.status(req, res));
 
-    const s = Number(tokens.status(req, res));
-
-    if (s >= 500) {
-      return String(s).red.bold;
-    } else if (s >= 400) {
-      return String(s).yellow.bold;
-    } else if (s >= 300) {
-      return String(s).cyan.bold;
-    } else if (s >= 200) {
-      return String(s).green.bold;
-    } else {
-      return String(s);
-    }
-
-  })();
+  const { code, status } = statusCode(c);
 
   const responseTime = (() => {
 
@@ -53,6 +71,7 @@ const requests = morgan((tokens, req, res) => {
     `[${tokens.date(req, res, 'web')}]`,
     method,
     tokens.url(req, res),
+    code,
     status,
     responseTime
   ];
@@ -69,7 +88,7 @@ const requests = morgan((tokens, req, res) => {
 
 });
 
-c.setTheme({
+co.setTheme({
   log: ['black', 'bold'],
   info: ['white', 'bold', 'bgBlue'],
   ok: ['white', 'bold', 'bgGreen'],
