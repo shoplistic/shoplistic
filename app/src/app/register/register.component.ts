@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserRegister } from '../_classes/user-register';
 import { environment } from '../../environments/environment';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { UserLogin } from '../_classes/user-login';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,34 @@ export class RegisterComponent implements AfterViewInit {
     this.af.nativeElement.focus();
   }
 
-  submit() {
+  login() {
+    console.log(this.registerData);
+
+    if (this.registerData.username && this.registerData.password) {
+
+      this._auth.login(this.registerData as UserLogin).subscribe(
+        res => {
+          localStorage.setItem('token', res.bearer);
+          this._router.navigate(['/']);
+          if (res.admin) {
+            localStorage.setItem('admin', 'true');
+          }
+        },
+        err => {
+          this.error = err.error.message ? err.error.message : err.message;
+        }
+      );
+
+    } else {
+
+      // Redirect to login page.
+      this._router.navigate(['/login']);
+
+    }
+
+  }
+
+  register() {
 
     this.submitted = true;
     this.error = '';
@@ -40,7 +68,7 @@ export class RegisterComponent implements AfterViewInit {
     this._auth.register(this.registerData)
       .subscribe(
         _res => {
-          this.ok = 'Account created!';
+          this.ok = 'Account created! Click the login button to proceed.';
         },
         err => {
           this.submitted = false;

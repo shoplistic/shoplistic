@@ -26,7 +26,8 @@
     </li>
     <li class="mdl-list__item buttons">
       <div class="right-align">
-        <button class="mdl-button" type="button" routerLink="/login">
+        <!-- <button (click)="login()" class="mdl-button" type="button" routerLink="/login"> -->
+        <button (click)="login()" type="button" class="mdl-button" type="button">
           Log in
         </button>
         <!-- <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit" [disabled]="registerForm.form.invalid || submitted || password.value !== password_repeat.value"> -->
@@ -40,5 +41,5 @@
       <span *ngIf="ok" class="ok">{{ ok }}</span>
     </li>
   </ul>
-  <re-captcha #re (resolved)="submit()" [(ngModel)]="registerData.captcha" name="captcha" size="invisible" [siteKey]="siteKey"></re-captcha>
+  <re-captcha #re (resolved)="register()" [(ngModel)]="registerData.captcha" name="captcha" size="invisible" [siteKey]="siteKey"></re-captcha>
 </form>

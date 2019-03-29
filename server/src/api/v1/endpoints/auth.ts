@@ -52,7 +52,8 @@ router.post('/', (req, res) => {
           } else {
 
             res.status(401).json({
-              message: 'Unauthorized'
+              message: 'Unauthorized',
+              logout: false
             });
 
           }
@@ -62,7 +63,8 @@ router.post('/', (req, res) => {
       } else {
 
         res.status(401).json({
-          message: 'Unauthorized'
+          message: 'Unauthorized',
+          logout: false
         });
 
       }
