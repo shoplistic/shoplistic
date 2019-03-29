@@ -45,7 +45,9 @@ router.post('/', async (req, res) => {
     body.password === body.password_repeat
   ) {
 
-    User.findOne({ username: body.username }, (err, user) => {
+    // Ignore username case
+
+    User.findOne({ username: new RegExp(['^', body.username, '$'].join(''), 'i') }, (err, user) => {
 
       if (err) {
 

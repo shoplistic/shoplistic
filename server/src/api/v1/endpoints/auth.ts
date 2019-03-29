@@ -18,7 +18,9 @@ router.post('/', (req, res) => {
 
   if (body.username && body.password) {
 
-    User.findOne({ username: body.username }, (err, user) => {
+    // Ignore username case
+
+    User.findOne({ username: new RegExp(['^', body.username, '$'].join(''), 'i') }, (err, user) => {
 
       if (err) {
 
