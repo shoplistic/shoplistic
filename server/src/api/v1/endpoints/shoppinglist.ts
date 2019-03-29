@@ -69,7 +69,7 @@ router.post('/', bearerGuard, (req, res) => {
 
           }
 
-          if (!changed) {
+          if (!changed && user.shoppingList.length < 1000) {
 
             user.shoppingList.push({
               barcode: barcode,
@@ -78,13 +78,27 @@ router.post('/', bearerGuard, (req, res) => {
               amount: amount
             });
 
+            user.save();
+
+            res.status(201).json({
+              message: 'Created'
+            });
+
+          } else if (changed) {
+
+            user.save();
+
+            res.status(201).json({
+              message: 'Created'
+            });
+
+          } else {
+
+            res.status(403).json({
+              message: 'Shopping list length reached.'
+            });
+
           }
-
-          user.save();
-
-          res.status(201).json({
-            message: 'Created'
-          });
 
         } else {
 
