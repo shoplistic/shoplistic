@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: `${location.protocol}//${location.hostname}:5000/v1/`
+  apiUrl: `${location.protocol}//${location.hostname}:5000/v1/`,
+  siteKey: '6Lc47poUAAAAAKmVitTgfXvXGMSoAPW6dLgOVWey'
 };
 
 /*

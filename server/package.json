@@ -17,10 +17,8 @@
   "private": true,
   "devDependencies": {
     "@types/mocha": "^5.2.5",
-    "@types/node-fetch": "^2.1.2",
     "concurrently": "^4.0.1",
     "mocha": "^5.2.0",
-    "node-fetch": "^2.3.0",
     "nodemon": "^1.18.4"
   },
   "dependencies": {
@@ -32,6 +30,7 @@
     "@types/mongoose": "^5.2.19",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.11.4",
+    "@types/node-fetch": "^2.1.2",
     "@types/pg": "^7.4.11",
     "@types/yamljs": "^0.2.30",
     "bcrypt": "^3.0.1",
@@ -42,6 +41,7 @@
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.1",
     "morgan": "^1.9.1",
+    "node-fetch": "^2.3.0",
     "pg": "^7.5.0",
     "pg-native": "^3.0.0",
     "swagger-ui-express": "^4.0.1",

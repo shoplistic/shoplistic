@@ -41,6 +41,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 // Environment
 import { environment } from '../environments/environment';
 
+// reCaptcha
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +66,9 @@ import { environment } from '../environments/environment';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [
     AuthService,

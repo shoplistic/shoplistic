@@ -85,6 +85,8 @@ paths:
           $ref: '#/components/responses/Created'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
         '409':
           $ref: '#/components/responses/Conflict'
         '422':
@@ -488,7 +490,15 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/GenericResponse'
+            type: object
+            properties:
+              message:
+                type: string
+              logout:
+                type: boolean
+                default: null
+            required:
+              - message
     NotFound: # 404
       description: Resourse not found
       content:

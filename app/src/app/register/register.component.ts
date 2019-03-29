@@ -2,6 +2,8 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
 import { UserRegister } from '../_classes/user-register';
+import { environment } from '../../environments/environment';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +13,12 @@ import { UserRegister } from '../_classes/user-register';
 export class RegisterComponent implements AfterViewInit {
 
   @ViewChild('af') af: ElementRef;
+  @ViewChild('re') re: RecaptchaComponent;
+
+  siteKey = environment.siteKey;
 
   submitted = false;
-  registerData = new UserRegister('', '', '');
+  registerData = new UserRegister('', '', '', '');
   error = '';
   ok = '';
 
@@ -27,7 +32,7 @@ export class RegisterComponent implements AfterViewInit {
     this.af.nativeElement.focus();
   }
 
-  onSubmit() {
+  submit() {
 
     this.submitted = true;
     this.error = '';

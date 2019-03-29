@@ -29,7 +29,8 @@
         <button class="mdl-button" type="button" routerLink="/login">
           Log in
         </button>
-        <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit" [disabled]="registerForm.form.invalid || submitted || password.value !== password_repeat.value">
+        <!-- <button class="mdl-button mdl-button--raised mdl-button--colored" type="submit" [disabled]="registerForm.form.invalid || submitted || password.value !== password_repeat.value"> -->
+        <button (click)="re.execute()" type="button" class="mdl-button mdl-button--raised mdl-button--colored" [disabled]="registerForm.form.invalid || submitted || password.value !== password_repeat.value">
           Register
         </button>
       </div>
@@ -39,4 +40,5 @@
       <span *ngIf="ok" class="ok">{{ ok }}</span>
     </li>
   </ul>
+  <re-captcha #re (resolved)="submit()" [(ngModel)]="registerData.captcha" name="captcha" size="invisible" [siteKey]="siteKey"></re-captcha>
 </form>

@@ -2,12 +2,14 @@ import { Router, json as bodyParser } from 'express';
 import * as User from '../models/User';
 import * as log from '../../../logger';
 import { bearerGuard } from '../guards/bearer';
+import fetch from 'node-fetch';
+import { env } from 'process';
 
 const router = Router();
 
 router.use(bodyParser());
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
   // const body = req.body;
 
@@ -15,7 +17,26 @@ router.post('/', (req, res) => {
     username: req.body.username ? String(req.body.username).trim() : '',
     password: req.body.password ? String(req.body.password) : '',
     password_repeat: req.body.password_repeat ? String(req.body.password_repeat) : '',
+    captcha: req.body.captcha ? String(req.body.captcha).trim() : ''
   }
+
+  // Check reCaptcha
+
+  const reRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${env.NODE_RE_SECRET_KEY}&response=${body.captcha}`);
+  const reData = await reRes.json();
+
+  if (!reData.success) {
+
+    res.status(401).json({
+      message: `reCaptcha failed. Please try again.`,
+      logout: false
+    });
+
+    return;
+
+  }
+
+  // Check if input matches requirements
 
   if (
     body.username.match(/^[a-zA-Z0-9_-]{4,20}$/) &&
