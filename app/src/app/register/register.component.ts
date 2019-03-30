@@ -34,7 +34,6 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   login() {
-    console.log(this.registerData);
 
     if (this.registerData.username && this.registerData.password) {
 
