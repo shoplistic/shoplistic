@@ -16,4 +16,4 @@ CREATE TABLE products (
 --
 -- Instert test data
 --
-INSERT INTO products (barcode, display_name, manufacturer) VALUES('0000', 'Test Item', 'The people who make it');
+-- INSERT INTO products (barcode, display_name, manufacturer) VALUES('0000', 'Test Item', 'The people who make it');

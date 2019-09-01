@@ -22,17 +22,21 @@ router.post('/', async (req, res) => {
 
   // Check reCaptcha
 
-  const reRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${env.NODE_RE_SECRET_KEY}&response=${body.captcha}`);
-  const reData = await reRes.json();
+  if (env.NODE_ENV === 'production') {
 
-  if (!reData.success) {
+    const reRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${env.NODE_RE_SECRET_KEY}&response=${body.captcha}`);
+    const reData = await reRes.json();
 
-    res.status(401).json({
-      message: `reCaptcha failed. Please try again.`,
-      logout: false
-    });
+    if (!reData.success) {
 
-    return;
+      res.status(401).json({
+        message: `reCaptcha failed. Please try again.`,
+        logout: false
+      });
+
+      return;
+
+    }
 
   }
 
