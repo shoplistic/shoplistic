@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
 import { BcdsComponent } from './bcds/bcds.component';
 import { StatsComponent } from './stats/stats.component';
+import { DevComponent } from './dev/dev.component';
 
 // Guards
 import { AuthGuard } from './_guards/auth.guard';
@@ -66,6 +67,10 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent
   },
+  {
+    path: 'donotgohere',
+    component: DevComponent
+  }
   {
     path: '**',
     component: Error404Component,
