@@ -409,6 +409,13 @@ paths:
       summary: Get info about a specific article
       tags:
         - Barcode Data Store
+      parameters:
+        - in: query
+          name: ica
+          description: Set to 1 to use the ICA API.
+          required: false
+          schema:
+            type: number
       responses:
         '200':
           description: Article object

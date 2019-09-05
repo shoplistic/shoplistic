@@ -3,6 +3,7 @@ import { Client } from 'pg';
 import { pgConf } from '../config';
 import { bearerGuard } from '../guards/bearer';
 import { adminGuard } from '../guards/admin';
+import fetch from 'node-fetch';
 
 const router = Router();
 
@@ -59,9 +60,39 @@ router.get('/:barcode', bearerGuard, (req, res) => {
 
     } else {
 
-      res.status(404).json({
-        message: 'Not Found'
-      });
+      const useIca = req.query['ica'] === '1';
+
+      if (useIca) {
+        const url = `https://handla.api.ica.se/api/upclookup?upc=${req.params.barcode}`;
+
+        fetch(url)
+        .then(r => r.json())
+        .then(r => {
+          if (r['Items'].length) {
+            res.status(200).json({
+              barcode: req.params.barcode,
+              display_name: r['Items'][0]['ItemDescription'],
+              manufacturer: ''
+            });
+          } else {
+            res.status(404).json({
+              message: 'Not Found'
+            });
+          }
+        })
+        .catch(() => {
+          res.status(404).json({
+            message: 'Not Found'
+          });
+        });
+
+      } else {
+
+        res.status(404).json({
+          message: 'Not Found'
+        });
+
+      }
 
     }
 
