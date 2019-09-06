@@ -1,6 +1,6 @@
 import { Router, json as bodyParser } from 'express';
 import * as User from '../models/User';
-import * as log from '../../../logger';
+import * as log from 'solid-log';
 import { bearerGuard } from '../guards/bearer';
 import fetch from 'node-fetch';
 import { env } from 'process';

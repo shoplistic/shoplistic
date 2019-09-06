@@ -1,6 +1,6 @@
 import { ClientConfig } from 'pg';
 import { env, exit } from 'process';
-import * as log from '../../logger';
+import * as log from 'solid-log';
 
 const pgConf: ClientConfig = {
   host: env.PG_HOST,

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { mongoConf } from './config';
 import * as process from 'process';
 import * as mongoose from 'mongoose';
-import * as log from '../../logger';
+import * as log from 'solid-log';
 
 // Endpoints
 import * as swagger from './endpoints/swagger';

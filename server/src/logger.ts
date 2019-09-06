@@ -3,6 +3,7 @@
 import * as morgan from 'morgan';
 import * as co from 'colors';
 import { HttpStatusCodes } from './http_status_codes';
+import * as log from 'solid-log';
 
 // [REQUEST] 172.21.0.1 [Tue, 23 Oct 2018 16:58:12 GMT] GET /path/gfdg 401 Authorization: Bearer eyJhb...wBJEo
 
@@ -66,13 +67,11 @@ const requests = morgan((tokens, req, res) => {
   })();
 
   const response = [
-    '[REQUEST]'.black.bold,
+    '[REQUEST]'.bgBlack.white.bold,
     tokens['remote-addr'](req, res).replace('::ffff:', ''),
-    `[${tokens.date(req, res, 'web')}]`,
     method,
     tokens.url(req, res),
-    code,
-    status,
+    `${code} ${status}`,
     responseTime
   ];
 
@@ -84,55 +83,60 @@ const requests = morgan((tokens, req, res) => {
     }
   }
 
-  return response.join(' ');
+  // console.log(response.join(' '));
+  // log.debug(response.join('\t').replace(new RegExp(/\\(e|[0-9]{0,3})\[[0-9]{0,2}m/, 'gm'), ''));
+  // log.debug(response.join('\t').replace('\x1b', ''));
+  log.debug(response.join('\t').replace(new RegExp('[\x1b]{1}[\[]{1}[0-9]{1,2}m', 'gm'), ''));
+
+  return null;
 
 });
 
-co.setTheme({
-  log: ['black', 'bold'],
-  info: ['white', 'bold', 'bgBlue'],
-  ok: ['white', 'bold', 'bgGreen'],
-  warn: ['white', 'bold', 'bgYellow'],
-  error: ['white', 'bold', 'bgRed'],
-  panic: ['white', 'bold', 'bgRed', 'inverse']
-});
+// co.setTheme({
+//   log: ['black', 'bold'],
+//   info: ['white', 'bold', 'bgBlue'],
+//   ok: ['white', 'bold', 'bgGreen'],
+//   warn: ['white', 'bold', 'bgYellow'],
+//   error: ['white', 'bold', 'bgRed'],
+//   panic: ['white', 'bold', 'bgRed', 'inverse']
+// });
 
-function log(e: any, label = '') {
-  // @ts-ignore
-  console.log(label.log || '[LOG]'.log, e);
-}
+// function log(e: any, label = '') {
+//   // @ts-ignore
+//   console.log(label.log || '[LOG]'.log, e);
+// }
 
-function info(e: any, label = '') {
-  // @ts-ignore
-  console.log(label.info || '[INFO]'.info, e);
-}
+// function info(e: any, label = '') {
+//   // @ts-ignore
+//   console.log(label.info || '[INFO]'.info, e);
+// }
 
-function ok(e: any, label = '') {
-  // @ts-ignore
-  console.log(label.ok || '[OK]'.ok, e);
-}
+// function ok(e: any, label = '') {
+//   // @ts-ignore
+//   console.log(label.ok || '[OK]'.ok, e);
+// }
 
-function warn(e: any, label = '') {
-  // @ts-ignore
-  console.log(label.warn || '[WARNING]'.warn, e);
-}
+// function warn(e: any, label = '') {
+//   // @ts-ignore
+//   console.log(label.warn || '[WARNING]'.warn, e);
+// }
 
-function error(e: any, label = '') {
-  // @ts-ignore
-  console.log(label.error || '[ERROR]'.error, e);
-}
+// function error(e: any, label = '') {
+//   // @ts-ignore
+//   console.log(label.error || '[ERROR]'.error, e);
+// }
 
-function panic(e: any, label = '') {
-  // @ts-ignore
-  console.log(label.panic || '[PANIC]'.panic, e);
-}
+// function panic(e: any, label = '') {
+//   // @ts-ignore
+//   console.log(label.panic || '[PANIC]'.panic, e);
+// }
 
 export {
   requests,
-  log,
-  info,
-  ok,
-  warn,
-  error,
-  panic
+  // log,
+  // info,
+  // ok,
+  // warn,
+  // error,
+  // panic
 };

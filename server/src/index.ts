@@ -2,27 +2,33 @@ import * as express from 'express';
 import * as cors from 'cors';
 import { env } from 'process';
 import { short as gitRevShort } from 'git-rev-sync';
-import * as log from './logger';
+import { requests as requestsLogger } from './logger';
 import * as api from './api/api';
+import * as log from 'solid-log';
 
 const app = express();
 
+if (env.NODE_ENV === 'dev') {
+  log.add(new log.ConsoleLogger(log.LogLevel.debug));
+  log.add(new log.FileLogger(log.LogLevel.debug));
+  log.warn('Server running in dev mode!');
+  app.use(cors());
+} else {
+  log.add(new log.ConsoleLogger(log.LogLevel.warn));
+  log.add(new log.FileLogger(log.LogLevel.warn));
+  app.use(cors({
+    origin: 'https://app.shoplistic.com'
+  }));
+}
+
 app.listen(env.NODE_PORT, () => {
   log.info(`Server started on port ${env.NODE_PORT}`);
+  console.log('pid: ', process.pid);
 });
 
 if (env.NODE_LOG_REQUESTS === 'true') {
   log.warn('Logging requests!');
-  app.use(log.requests);
-}
-
-if (env.NODE_ENV === 'dev') {
-  log.warn('Server running in dev mode!');
-  app.use(cors());
-} else {
-  app.use(cors({
-    origin: 'https://app.shoplistic.com'
-  }));
+  app.use(requestsLogger);
 }
 
 // Use API v1
