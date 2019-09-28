@@ -12,6 +12,7 @@ import * as auth from './endpoints/auth';
 import * as profile from './endpoints/profile';
 import * as shoppinglist from './endpoints/shoppinglist';
 import * as admin from './endpoints/admin';
+import * as version from './endpoints/version';
 
 // Connect to Mongodb
 mongoose
@@ -35,6 +36,7 @@ router.use('/auth', auth);
 router.use('/profile', profile);
 router.use('/shoppinglist', shoppinglist);
 router.use('/admin', admin);
+router.use('/version', version);
 
 router.get('/', (_req, res) => {
   res.redirect('/v1/docs');

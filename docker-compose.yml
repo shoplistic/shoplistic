@@ -30,6 +30,7 @@ services:
       MONGO_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - ${SHOPLISTIC_DIR}:/shoplistic/
+      - ${SHOPLISTIC_DIR}/../frontend:/frontend/:ro
 
   postgres:
     image: postgres
