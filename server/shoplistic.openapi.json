@@ -1,0 +1,912 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Shoplistic API.",
+    "description": "Complete documentation for the Shoplistic API.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://api.shoplistic.com/v1"
+    }
+  ],
+  "paths": {
+    "/version": {
+      "get": {
+        "summary": "Get version info about frontend and backend.",
+        "tags": [
+          "Version"
+        ],
+        "security": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "frontend": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string",
+                          "example": "42f2542"
+                        },
+                        "updated": {
+                          "type": "number",
+                          "example": 1569702971923,
+                          "description": "Unix timestamp in milliseconds."
+                        }
+                      }
+                    },
+                    "backend": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string",
+                          "example": "acef640"
+                        },
+                        "updated": {
+                          "type": "number",
+                          "example": 1569702971923,
+                          "description": "Unix timestamp in milliseconds."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "summary": "Authenticate with a username and password to recieve a bearer token",
+        "tags": [
+          "Authenticate"
+        ],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "john"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "ThisIsMySuperSecurePassword123"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User authenticated. A JSON object containging a username and a bearer token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "example": "john"
+                    },
+                    "bearer": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  },
+                  "required": [
+                    "username",
+                    "bearer",
+                    "admin"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Create a new user",
+        "tags": [
+          "User"
+        ],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "john"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "ThisIsMySuperSecurePassword123"
+                  },
+                  "password_repeat": {
+                    "type": "string",
+                    "example": "ThisIsMySuperSecurePassword123"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password",
+                  "password_repeat"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "summary": "Get user info",
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "User info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "registerDate": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "deprecated": true,
+        "summary": "Update user info",
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "john"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/profile/password": {
+      "patch": {
+        "summary": "Update password",
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "old_password": {
+                    "type": "string",
+                    "example": "ThisIsMySuperSecurePassword123"
+                  },
+                  "new_password": {
+                    "type": "string",
+                    "example": "NewSecurePassword1"
+                  },
+                  "password_repeat": {
+                    "type": "string",
+                    "example": "NewSecurePassword1"
+                  }
+                },
+                "required": [
+                  "old_password",
+                  "new_password",
+                  "password_repeat"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    },
+                    "logout": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shoppinglist": {
+      "get": {
+        "summary": "Get all items in the shopping list",
+        "tags": [
+          "Shopping list"
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShoppingListArticle"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add to shopping list",
+        "tags": [
+          "Shopping list"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "barcode": {
+                    "type": "string",
+                    "example": 7310070001764
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "example": "Ramlösa Smultron 50cl"
+                  },
+                  "manufacturer": {
+                    "type": "string",
+                    "example": "Carlsberg Sweden"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "example": 2
+                  }
+                },
+                "required": [
+                  "barcode",
+                  "display_name",
+                  "manufacturer",
+                  "amount"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Edit item in shopping list",
+        "deprecated": true,
+        "tags": [
+          "Shopping list"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShoppingListArticle"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove from the shoppinglist",
+        "tags": [
+          "Shopping list"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "5be1f0dd1c798c0389139bd5"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/bcds": {
+      "post": {
+        "summary": "Add article to the barcode database",
+        "tags": [
+          "Barcode Data Store"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "barcode": {
+                    "type": "string",
+                    "example": 7310070001764
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "example": "Ramlösa Smultron 50cl"
+                  },
+                  "manufacturer": {
+                    "type": "string",
+                    "example": "Carlsberg Sweden"
+                  }
+                },
+                "required": [
+                  "barcode",
+                  "display_name",
+                  "manufacturer"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Edit an article in the barcode database",
+        "tags": [
+          "Barcode Data Store"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "barcode": {
+                    "type": "string",
+                    "example": 7310070001764
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "example": "Ramlösa Smultron 50cl"
+                  },
+                  "manufacturer": {
+                    "type": "string",
+                    "example": "Carlsberg Sweden"
+                  }
+                },
+                "required": [
+                  "barcode",
+                  "display_name",
+                  "manufacturer"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete article from the barcode database",
+        "tags": [
+          "Barcode Data Store"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "barcode": {
+                    "type": "string",
+                    "example": 7310070001764
+                  }
+                },
+                "required": [
+                  "barcode"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/bcds/search": {
+      "get": {
+        "summary": "Search by display_name",
+        "tags": [
+          "Barcode Data Store"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of article objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "barcode": {
+                        "type": "string",
+                        "example": 7310070001764
+                      },
+                      "display_name": {
+                        "type": "string",
+                        "example": "Ramlösa Smultron 50cl"
+                      },
+                      "manufacturer": {
+                        "type": "string",
+                        "example": "Carlsberg Sweden"
+                      }
+                    },
+                    "required": [
+                      "barcode",
+                      "display_name",
+                      "manufacturer"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/bcds/{barcode}": {
+      "get": {
+        "summary": "Get info about a specific article",
+        "tags": [
+          "Barcode Data Store"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ica",
+            "description": "Set to 1 to use the ICA API.",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "barcode": {
+                      "type": "string",
+                      "example": 7310070001764
+                    },
+                    "display_name": {
+                      "type": "string",
+                      "example": "Ramlösa Smultron 50cl"
+                    },
+                    "manufacturer": {
+                      "type": "string",
+                      "example": "Carlsberg Sweden"
+                    }
+                  },
+                  "required": [
+                    "barcode",
+                    "display_name",
+                    "manufacturer"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/admin/stats": {
+      "get": {
+        "summary": "Info about the system.",
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Info object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bcds_entries": {
+                      "type": "number",
+                      "example": 543353
+                    },
+                    "registerd_users": {
+                      "type": "number",
+                      "example": 253
+                    },
+                    "uptime": {
+                      "type": "number",
+                      "example": 534534
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "Ok": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      },
+      "Created": {
+        "description": "Resource created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Malformed request syntax",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Valid request but credentials are incorrect",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "logout": {
+                  "type": "boolean",
+                  "default": null
+                }
+              },
+              "required": [
+                "message"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resourse not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      },
+      "SeverError": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericResponse"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ShoppingListArticle": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "barcode": {
+            "type": "string"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "manufacturer": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "_id",
+          "barcode",
+          "display_name",
+          "manufacturer",
+          "amount"
+        ]
+      },
+      "GenericResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

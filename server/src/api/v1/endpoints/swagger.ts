@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import * as swaggerUi from 'swagger-ui-express';
 import * as yaml from 'yamljs';
 import * as path from 'path';
+// @ts-ignore
+import * as swaggerUi from 'swagger-ui-express';
 
-const swaggerDoc = yaml.load(path.join(process.cwd(), 'shoplistic.openapi.yml'));
+const swaggerDoc = require(path.join(process.cwd(), 'shoplistic.openapi.json'));
 const router = Router();
 
 const DisableTryItOut = () => {

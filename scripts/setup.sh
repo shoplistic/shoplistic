@@ -68,7 +68,9 @@ docker exec $(docker ps | grep ${DIR}_postgres | rev | cut -d ' ' -f 1 | rev) "/
 
 # Restart the containers
 docker-compose down
-docker-compose up -d
+#docker-compose up -d
 
-PORT=$(cat .env | grep NODE_PORT | cut -b 11-15)
-echo "Done. API running on port $PORT"
+#PORT=$(cat .env | grep NODE_PORT | cut -b 11-15)
+#echo "Done. API running on port $PORT"
+
+echo "Done!"
